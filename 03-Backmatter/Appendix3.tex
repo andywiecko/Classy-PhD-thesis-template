@@ -1,0 +1,255 @@
+\chapter{Dwuqubitowy układ z zerowymi modami Majorany}\label{chap:MZMCNOT}
+
+W tym krótkim dodatku zaprezentowano układ zawierający sześć \MZM, który może posłużyć za model układu dwuqubitowego.
+W odróżnieniu od analizy przeprowadzonej w~sekcji~\ref{sec:quantumGates}, w takim układzie można skonstruować bramki dwuqubitowe.\\
+
+
+Układ zawierający sześć \MZM\ musi posiadać $2^{6/2}=8$ zdegenerowanych stanów podstawowych, po cztery stany z określoną parzystością.
+Tak jak napisano w sekcji~\ref{sec:quantumGates}, przejścia pomiędzy stanami o różnej parzystości są niedozwolone.
+Analizę w tym rozdziale przeprowadzono dla stanów nieparzystych: $\qstate{eoe},\,\qstate{eeo},\,\qstate{oee},\,\qstate{ooo}$.\footnote{Oczywiście identyczną analizę można przeprowadzono dla stanów parzystych: $\qstate{eee},\,\qstate{ooe},\,\qstate{oeo},\,\qstate{eoo}$.}
+Bazę  dwuqubitowego układu można ponumerować w następujący sposób:
+\begin{align}
+\qstate{eoe}& \to \qstate{00},\\
+\qstate{eeo}& \to \qstate{01},\\
+\qstate{oee}& \to \qstate{10},\\
+\qstate{ooo}& \to \qstate{11}.
+\end{align}
+W odróżnieniu od sekcji~\ref{sec:quantumGates}, układ wraz z operacjami wyplatania tworzy grupę $\braidGroupi 6$.
+Ta grupa posiada 10 generatorów $\braidOperatori_1,\dots,\braidOperatori_5,\braidOperatori_1^\dagger,\dots,\braidOperatori_5^\dagger$.
+Następnie przeprowadzono analizę działania wybranych operatorów wyplatania oraz ich złożeń na stany bazowe układu dwuqubitowego i odtworzono część wyników jakie otrzymano dla układu reprezentującego pojedynczy qubit.
+Na potrzeby dalszej reprezentacji działania poszczególnych operatorów wyplatania i~ich złożeń, przyjęto następującą postać wektorów bazowych:
+\begin{equation}
+\qstate{00} = 
+\left[
+\begin{array}{c}
+1\\0\\0\\0
+\end{array}\right],\,\,
+\qstate{01} = 
+\left[
+\begin{array}{c}
+0\\1\\0\\0
+\end{array}\right],\,\,
+\qstate{10} = 
+\left[
+\begin{array}{c}
+0\\0\\1\\0
+\end{array}\right],\,\,
+\qstate{11} = 
+\left[
+\begin{array}{c}
+0\\0\\0\\1
+\end{array}\right].
+\end{equation}
+Operatory $\braidOperatori_1$ oraz $\braidOperatori_5$ mają podobne działanie, ale funkcjonują dla różnych qubitów
+  w~układzie dwuqubitowym.
+Można to w prosty sposób pokazać analogicznie jak pokazano to w sekcji~\ref{sec:quantumGates}.
+Poniżej zaprezentowano postać operatorów $\braidOperatori_1$ oraz $\braidOperatori_5$:
+\begin{equation}
+\braidOperatori_1 = 
+\left[
+\begin{array}{cccc}
+\exp(-\iu\tfrac\pi4)&0&0&0\\
+0&\exp(-\iu\tfrac\pi4)&0&0\\
+0&0&\exp(+\iu\tfrac\pi4)&0\\
+0&0&0&\exp(+\iu\tfrac\pi4)\\
+\end{array}\right],
+\end{equation}
+\begin{equation}
+\braidOperatori_5=\left[
+\begin{array}{cccc}
+\exp(-\iu\tfrac\pi4)&0&0&0\\
+0&\exp(+\iu\tfrac\pi4)&0&0\\
+0&0&\exp(-\iu\tfrac\pi4)&0\\
+0&0&0&\exp(+\iu\tfrac\pi4)\\
+\end{array}\right].
+\end{equation}
+Ich podwójne działanie można zapisać w następujący sposób:
+\begin{align}
+\zgate_1\equiv \braidOperatori_1^2 & = -\iu\paulii^z_1 \equiv -\iu( \paulii^z \,\kron\, \bbone),\\
+\zgate_2\equiv \braidOperatori_5^2 & = -\iu\paulii^z_2 \equiv  -\iu(\bbone\,\kron\,\paulii^z).
+\end{align}
+Interesujące jest działanie generatora $\braidOperatori_3$
+\begin{equation}
+\braidOperatori_3=\left[
+\begin{array}{cccc}
+\exp(+\iu\tfrac\pi4)&0&0&0\\
+0&\exp(-\iu\tfrac\pi4)&0&0\\
+0&0&\exp(-\iu\tfrac\pi4)&0\\
+0&0&0&\exp(+\iu\tfrac\pi4)\\
+\end{array}\right].
+\end{equation}
+Podwójne działanie takiego operatora $\braidOperatori_3$ jest równoważne z działaniem bramki dwuqubitowej Isinga $\zzgate$
+\begin{equation}
+\zzgate_{12}\equiv \braidOperatori_3^2 = -\iu \braidOperatori_1^2\braidOperatori_5^2 = \iu \paulii_1^z\paulii_2^z \equiv \iu (\paulii^z\,\kron\,\paulii^z).
+\end{equation}
+Porównanie realizacji operacji $\braidOperatori_1^2,\,\braidOperatori_3^2,\,\braidOperatori_5^2$ można znaleźć na rysunku \ref{fig:z1z1zz12}.
+Analogicznie można przeprowadzić analizę dla pozostałych generatorów $\braidOperatori_2$ oraz $\braidOperatori_4$, które można przedstawić w następującej postaci:
+\begin{equation}
+    \braidOperatori_2=\frac1{\sqrt2}\left[
+\begin{array}{cccc}
+1&0&-\iu&0\\
+0&1&0&-\iu\\
+-\iu&0&1&0\\
+0&-\iu&0&1\\
+\end{array}\right],
+\end{equation}
+\begin{equation}
+    \braidOperatori_4=\frac1{\sqrt2}\left[
+\begin{array}{cccc}
+1&-\iu&0&0\\
+-\iu&1&0&0\\
+0&0&1&-\iu\\
+0&0&-\iu&1\\
+\end{array}\right].
+\end{equation}
+Podwójne działanie takich operatorów odpowiada realizacjom bramek $\xgate$ na odpowiednich qubitach:
+\begin{align}
+    \xgate_1 &= \braidOperatori_2^2 = -\iu (\paulii_1^x)\equiv -\iu (\paulii^x\,\kron\,\bbone),\\
+    \xgate_2 &= \braidOperatori_4^2 = -\iu (\paulii_2^x)\equiv -\iu (\bbone\,\kron\,\paulii^x).
+\end{align}
+Realizację operacji $\braidOperatori_2^2$ oraz $\braidOperatori_4^2$ można znaleźć na rysunku~\ref{fig:x1x2}.
+
+
+\begin{figure}
+\begin{tabularx}{\textwidth}{  lcc  lcc lcc}
+(a) & & & (b) & & & (c) \\
+\begin{minipage}{0.2\textwidth}
+  \Qcircuit @C=1em @R=.7em {& \gate{\zgate} & \qw \\& \qw & \qw}\end{minipage} &
+  $\equiv$  &  
+  \begin{minipage}{0.2\textwidth}\input{04-Includes/Figures/tikz/braid9.tex}\end{minipage} &
+ 
+ \begin{minipage}{0.2\textwidth}
+\Qcircuit @C=1em @R=.7em {& \multigate{1}{\zgate\zgate} & \qw \\& \ghost{\zzgate}& \qw }\end{minipage} &
+ $\equiv$ & 
+ \begin{minipage}{0.2\textwidth}
+\input{04-Includes/Figures/tikz/braid10.tex} \end{minipage} 
+&
+\begin{minipage}{0.2\textwidth}\Qcircuit @C=1em @R=.7em {& \qw & \qw\\& \gate{\zgate} & \qw } \end{minipage}
+& $\equiv$ &
+\begin{minipage}{0.2\textwidth}\input{04-Includes/Figures/tikz/braid11.tex}\end{minipage}
+\end{tabularx}
+\caption[Reprezentacja bramek: $Z_1,\,Z_2,\,ZZ_{12}$.]{
+(a) Bramka $\zgate_1$ oraz jej reprezentacja $\braidOperatori_1^2$;
+(b) Bramka $\zzgate_{12}$ oraz jej reprezentacja $\braidOperatori_3^2$;
+(c) Bramka $\zgate_2$ oraz jej reprezentacja $\braidOperatori_5^2$.
+}
+\label{fig:z1z1zz12}
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}
+\hspace{2cm}
+\begin{tabularx}{\textwidth}{  lcc  lcc}
+(a) & & & (b)  \\
+ \begin{minipage}{0.2\textwidth}
+  \Qcircuit @C=1em @R=.7em {& \gate{\xgate} & \qw \\& \qw & \qw}\end{minipage} &
+  $\equiv$  &  
+  \begin{minipage}{0.2\textwidth}\input{04-Includes/Figures/tikz/braid12.tex}\end{minipage} &
+  \begin{minipage}{0.2\textwidth}\Qcircuit @C=1em @R=.7em {& \qw & \qw\\& \gate{\xgate} & \qw } \end{minipage}
+& $\equiv$ &
+\begin{minipage}{0.2\textwidth}\input{04-Includes/Figures/tikz/braid13.tex}\end{minipage}
+\end{tabularx}
+\caption[Reprezentacja bramek: $X_1,\,X_2$.]{
+(a) Bramka $\xgate_1$ oraz jej reprezentacja $\braidOperatori_2^2$;
+(b) Bramka $\xgate_{2}$ oraz jej reprezentacja $\braidOperatori_4^2$.
+}
+\label{fig:x1x2}
+\end{figure}
+
+
+
+\begin{figure}
+\hspace{2cm}
+\begin{tabularx}{\textwidth}{  lcc  lcc}
+(a) & & & (b)  \\
+ \begin{minipage}{0.2\textwidth}
+  \Qcircuit @C=1em @R=.7em {& \gate{\hadamard} & \qw \\& \qw & \qw}\end{minipage} &
+  $\equiv$  &  
+  \begin{minipage}{0.3\textwidth}\input{04-Includes/Figures/tikz/braid14.tex}\end{minipage} &
+  \begin{minipage}{0.2\textwidth}\Qcircuit @C=1em @R=.7em {& \qw & \qw\\& \gate{\hadamard} & \qw } \end{minipage}
+& $\equiv$ &
+\begin{minipage}{0.3\textwidth}\input{04-Includes/Figures/tikz/braid15.tex}\end{minipage}
+\end{tabularx}
+\caption[Reprezentacja bramek: $H_1,\,H_2$.]{
+(a) Bramka $\hadamard_1$ oraz jej reprezentacja $\braidOperatori_1\braidOperatori_2\braidOperatori_1$;
+(b) Bramka $\hadamard_{2}$ oraz jej reprezentacja $\braidOperatori_5\braidOperatori_4 \braidOperatori_5$.
+}
+\label{fig:h1h2}
+\end{figure}
+
+
+\begin{figure}
+\hspace{2cm}
+\begin{tabularx}{\textwidth}{  lcc  lcc}
+(a) & & & (b)  \\
+ \begin{minipage}{0.2\textwidth}
+  \Qcircuit @C=1em @R=.7em {& \gate{\ygate} & \qw \\& \qw & \qw}\end{minipage} &
+  $\equiv$  &  
+  \begin{minipage}{0.3\textwidth}\input{04-Includes/Figures/tikz/braid16.tex}\end{minipage} &
+  \begin{minipage}{0.2\textwidth}\Qcircuit @C=1em @R=.7em {& \qw & \qw\\& \gate{\ygate} & \qw } \end{minipage}
+& $\equiv$ &
+\begin{minipage}{0.3\textwidth}\input{04-Includes/Figures/tikz/braid17.tex}\end{minipage}
+\end{tabularx}
+\caption[Reprezentacja bramek: $Y_1,\,Y_2$.]{
+(a) Bramka $\ygate_1$ oraz jej reprezentacja $\braidOperatori_1\braidOperatori_2^2\braidOperatori_1^\dagger$;
+(b) Bramka $\ygate_{2}$ oraz jej reprezentacja $\braidOperatori_5\braidOperatori_4 ^2\braidOperatori_5^\dagger$.
+}
+\label{fig:y1y2}
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
+    \input{04-Includes/Figures/tikz/braid8.tex}
+    \caption[Relizacja bramki \texttt{CNOT}.]{Realizacja bramki \CNOT\ oraz jej reprezentacja $\braidOperatori_1\braidOperatori_3\braidOperatori_4\braidOperatori_3\braidOperatori_5\braidOperatori_4^\dagger\braidOperatori_3^\dagger$.}
+    \label{fig:cnot}
+\end{figure}
+
+\newpage
+Korzystając z wymienionych generatorów $\braidOperatori_1$, \dots, $\braidOperatori_5$ oraz ich sprzężeń, można utworzyć inne bramki:
+\begin{itemize}
+
+\item bramki Hadamarda $\hadamard$ (przedstawione na rysunku~\ref{fig:h1h2})
+  \begin{align}
+    \hadamard_1 &= \braidOperatori_1\braidOperatori_2\braidOperatori_1 \equiv - \tfrac{\iu}{\sqrt2}
+    \begin{bmatrix}
+    1 & 1\\
+    1 & -1
+    \end{bmatrix}
+    \,\kron\,\bbone,\\
+        \hadamard_1 &= \braidOperatori_1\braidOperatori_2\braidOperatori_1 \equiv - \tfrac{\iu}{\sqrt2}\, \bbone \,\kron\,
+    \begin{bmatrix}
+    1 & 1\\
+    1 & -1
+    \end{bmatrix}
+  ,
+\end{align}
+  
+  
+  
+      \item bramki $\ygate$ (przedstawione na rysunku~\ref{fig:y1y2})
+\begin{align}
+    \ygate_1 &= \braidOperatori_1\braidOperatori_2^2\braidOperatori_1^\dagger = -\iu (\paulii_1^y)\equiv -\iu (\paulii^y\,\kron\,\bbone),\\
+    \ygate_2 &= \braidOperatori_5\braidOperatori_4^2\braidOperatori_5^\dagger = -\iu (\paulii_2^y)\equiv -\iu (\bbone\,\kron\,\paulii^y),
+\end{align}
+    
+    \item bramki $\CNOT$ (przedstawiona na rysunku~\ref{fig:cnot})
+    \begin{equation}
+        \CNOT = \braidOperatori_1\braidOperatori_3\braidOperatori_4\braidOperatori_3\braidOperatori_5\braidOperatori_4^\dagger\braidOperatori_3^\dagger= \eee^{-\iu\pi/4}\left[
+        \begin{array}{cccc}
+            1 & 0 & 0 & 0  \\
+            0 & 1 & 0 & 0  \\
+            0 & 0 & 0 & 1  \\
+            0 & 0 & 1 & 0 
+        \end{array}\right].
+    \end{equation}
+    
+\end{itemize}
+
+\ornament

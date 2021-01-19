@@ -1,0 +1,50 @@
+% encoding
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{polski}
+\usepackage[T1]{fontenc}
+
+% saving computer modern mathcal chars
+\newcommand\savemathcal[1]{%
+  \expandafter\newsavebox\csname mc#1content\endcsname%
+  \expandafter\savebox\csname mc#1content\endcsname{$\mathcal{#1}$}%
+  \expandafter\newcommand\csname mc#1\endcsname{%
+    \expandafter\usebox\expandafter{\csname mc#1content\endcsname}}%
+}
+\newcommand\altmathcal[1]{\csname mc#1\endcsname}
+\savemathcal{O}
+\savemathcal{B}
+\savemathcal{T}
+\savemathcal{G}
+
+% fancy accents
+\usepackage{tipa}
+
+
+% ams packages
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+
+% fonts
+\usepackage{times} % sans
+
+% math fonts
+\usepackage{mathabx} 
+\usepackage{mathptmx}
+\usepackage{bbold} % nice mathbb 1 operator
+
+\usepackage{textcomp}
+\DeclareSymbolFont{eulerup}{U}{zeur}{m}{n}
+\DeclareMathSymbol{\upgamma}{\mathord}{eulerup}{"0D}
+
+
+\usepackage{accents}
+\newcommand\thickbar[1]{\accentset{\rule{.4em}{.8pt}}{#1}}
+
+
+%\usepackage[sf,scale=0.95]{libertine}
+%\usepackage{Rosario}
+\usepackage[scale=0.95]{sourcesanspro} % sans
+\usepackage{ebgaramond} % serif

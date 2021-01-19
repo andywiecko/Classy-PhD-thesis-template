@@ -1,0 +1,70 @@
+\usepackage[newparttoc]{titlesec}
+
+
+\newlength\tocrulewidth
+\setlength{\tocrulewidth}{1.5pt}
+
+% part
+\titleclass{\part}{top}
+\let\tempAAApart\part
+
+\def\part#1{
+\tempAAApart{#1}
+\begingroup
+\parindent=0mm
+\etocsettocstyle{\rule{\linewidth}{\tocrulewidth}\vskip0.5\baselineskip}{\rule{\linewidth}{\tocrulewidth}}
+\vspace{2\baselineskip}
+\small
+\hypersetup{linkcolor=black}
+\contentsmargin{1em}
+
+\localtableofcontents*
+
+\endgroup
+\cleardoublepage
+}
+
+\titlespacing{\part}{0pt}{*4}{*1.5}
+
+\titleformat{\part}[display]
+{\vspace{0.25\textheight}}
+{\filcenter \bfseries\sffamily \Huge \partname\, \Romanbar{\thepart}:}
+{20pt}
+{\fontsize{35}{30}\selectfont\swshape\filcenter\color{black}}
+%{\fontsize{35}{30}\selectfont\bfseries\sffamily\filcenter\color{black}}
+
+\titleformat{\chapter}[display]
+{\bfseries\Huge\sffamily}
+%{\Huge}
+{\filleft\Large\MakeUppercase{\chaptertitlename}\rlap{\hspace*{0.25cm} \Huge{\color{gray}{\fontsize{75}{60}\selectfont \thechapter}}}} %50 without \sff...
+{1ex}
+{\center}
+
+% section
+\titleformat{name=\section,page=even}[leftmargin]
+{\normalfont
+\bfseries\filleft}
+{\thesection}{.5em}{}
+
+\titleformat{name=\section,page=odd}[rightmargin]
+{\normalfont
+\bfseries\filright}
+{\thesection}{.5em}{}
+
+\titlespacing{\section}
+{8pc}{1.5ex plus .1ex minus .2ex}{1pc}
+
+
+% subsection
+\titleformat{name=\subsection,page=even}[leftmargin]
+{\normalfont
+\filleft}
+{\thesubsection}{.5em}{}
+
+\titleformat{name=\subsection,page=odd}[rightmargin]
+{\normalfont
+\filright}
+{\thesubsection}{.5em}{}
+
+\titlespacing{\subsection}
+{8pc}{1.5ex plus .1ex minus .2ex}{1pc}

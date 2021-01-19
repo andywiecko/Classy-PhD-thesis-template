@@ -1,0 +1,43 @@
+% hyperlinks
+%\usepackage[colorlinks,backref=page]{hyperref}
+\usepackage[colorlinks,pagebackref]{hyperref}
+
+\usepackage{cleveref}
+\newcommand{\crefrangeconjunction}{--}
+\newcommand{\crefpairconjunction}{ oraz }
+\newcommand{\creflastconjunction}{ oraz }
+
+
+\hypersetup{
+  linkcolor  = MidnightBlue,
+  citecolor  = YellowOrange,
+  urlcolor   = OliveGreen,
+  colorlinks = true,
+  linktoc=all,
+  pdftitle={Mody Majorany w jednowymiarowych układach z oddziaływaniami wielociałowymi},
+  pdfauthor={Andrzej Więckowski},
+  pdfsubject={rozprawa doktorska},
+  pdfkeywords={zerowe mody Majorany, oddziaływania wielociałowe, model Kitaeva}
+}
+
+\def\backrefsep{, }%
+\def\backreftwosep{ oraz~}%
+\def\backreflastsep{, oraz~}%
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{[{\small%
+    \ifcase #1 Not cited.%
+          \or s.~#2.%
+          \else s.~#2.%
+    \fi%
+    }]}
+    
+    
+%\def\myBibPreambleText{[Citing pages are listed after each reference.]}
+
+\def\myBibPreambleText{[Cytujące strony są wypisane po każdej referencji.]}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%\hypersetup{draft}
+%%%%%%%%%%%%%%%%%%%%%%%

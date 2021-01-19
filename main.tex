@@ -1,0 +1,133 @@
+\documentclass{thesis}
+
+\title{Majorana Modes\\ in one dimensional systems\\ 
+with many-body interactions}
+\title{Mody Majorany\\ w jednowymiarowych układach z~oddziaływaniami wielociałowymi}
+\institute{Politechnika Wrocławska\\Wydział Podstawowych Problemów Techniki\\
+Katedra Fizyki Teoretycznej}
+\author{Andrzej Więckowski}
+\date{Wrocław 2020}
+\supervisor{prof. dr hab.\\Marcin Mierzejewski}
+\auxsupervisor{dr Bartłomiej Gardas}
+
+%\usepackage{marginnote}
+\newcommand{\mymarginpar}[1]{\marginpar{\captionsetup{font=footnotesize}#1}} %new code
+\usepackage[side,flushmargin,perpage,ragged]{footmisc} %perpage resets enumeration at each page
+%\usepackage{marginfix}
+%\usepackage{marginnote}
+
+\usepackage{caption}
+\usepackage{graphicx}
+\graphicspath{{04-Includes/Figures/}}
+\usepackage{braids}
+
+\usepackage{tabularx}
+\usepackage{qcircuit}
+\usepackage{sidecap}
+
+\input{definitions.tex}
+
+
+\sloppy
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%   FRONTMATTER   %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newgeometry{left=40mm, right=35mm,top=20mm,bottom=20mm}
+\input{01-Frontmatter/TitlePage.tex}
+\restoregeometry   
+
+\pagestyle{plain}
+\frontmatter
+\pagestyle{plain}
+
+\linespread{1.5}\selectfont
+
+
+
+
+\input{01-Frontmatter/AuthorStatement.tex}
+\input{01-Frontmatter/Dedication.tex}
+\input{01-Frontmatter/Acknowledgements.tex}
+\input{01-Frontmatter/Abstracts.tex}
+
+\begingroup
+\linespread{1.4}\selectfont
+\toc % table of contents
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%   MAINMATTER   %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\pagestyle{fancy}
+
+\input{02-Mainmatter/Preface.tex}
+
+\part{Wprowadzenie}\label{part:I}
+\input{02-Mainmatter/Chapter1.tex}
+\input{02-Mainmatter/Chapter2.tex}
+\input{02-Mainmatter/Chapter3.tex}
+ 
+\part{Metodyka badań}\label{part:II}
+\input{02-Mainmatter/Chapter4.tex}
+\input{02-Mainmatter/Chapter5.tex}
+\input{02-Mainmatter/Chapter6.tex}
+
+\part{Wyniki analityczne i~numeryczne}\label{part:III}
+\input{02-Mainmatter/Chapter7.tex}
+\input{02-Mainmatter/Chapter8.tex}
+\input{02-Mainmatter/Chapter9.tex}
+
+\input{02-Mainmatter/Conclusions.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%   BACKMATTER   %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\part{Dodatki}\label{part:IV}
+\begin{appendices}
+\begingroup\linespread{1.0}\selectfont
+\input{03-Backmatter/Appendix1.tex}
+\endgroup
+\input{03-Backmatter/Appendix2.tex}
+\input{03-Backmatter/Appendix3.tex}
+\end{appendices}
+
+
+% glossaries
+\makeatletter
+\long\def\backmatter{\@mainmatterfalse}
+\makeatother
+
+\backmatter
+
+\glsaddallunused[\acronymtype]
+\glssetwidest{DMRG}
+\printglossary[title={Akronimy},type=\acronymtype]
+\glsaddallunused[symbolslist]
+\glssetwidest{$\{A,B\}$}
+\printglossary[title={Spis symboli},type=symbolslist]
+
+\cleardoublepage
+
+% list of URLs
+\input{03-Backmatter/ListOfURLs}
+
+
+% lof
+\lof %listoffigures
+
+% bib
+\nocite{*}
+\bibliographystyle{packages/unsrt}
+%\bibliographystyle{packages/unsrt2}
+\bibliography{03-Backmatter/Bibliography.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\show\bfseries
+
+\end{document}

@@ -1,0 +1,228 @@
+
+\chapter{Zerowe Mody Majorany} \label{chap:majorana}
+
+\section*{Opis rozdziału}
+
+W tym rozdziale czytelnik zostanie wprowadzony w definicję \MZM, zostaną wskazane różnice pomiędzy operatorami Majorany $\gammai$ na węźle $i$, a \MZM\ $\Gammai$.
+Przedstawiony tutaj zostanie również najprostszy model realizujący \MZM --- model Kitaeva.
+Przedstawiona analiza w tym rozdziale została opracowana na podstawie prac \cite{kitaev.2001,stanescu.2016,wieckowski.maska.2018,sarma.freedman.2015}.
+
+
+
+\section{Operatory Majorany}
+
+Operatorami Majorany nazywamy operatory hermitowskie $\gammai$, które spełniają następujące relacje antykomutacji
+\begin{equation}
+    \{ \gammai, \gammaj\} = 2\deltaij .\label{eq:majoranaCom0}
+\end{equation}
+Najważniejsze własności tych unitarnych operatorów są następujące:
+\begin{align}
+\gammaii^\dagger &= \gammai\label{eq:majoranaOperatorHermitian},\\    
+\gammai^2 &= \bbone\label{eq:majoranaOperatorOne}.
+\end{align}
+Wspomniane operatory o takich własnościach, można skonstruować za pomocą $\sites$ par fermionowych operatorów kreacji $\aid$ i anihilacji $\ai$:\footnote{Wprowadzono tutaj indeksy $\pm$, ponieważ z każdym węzłem $i$ możemy zdefiniować dwa różne operatory majorany $\gammai^+$, $\gammai^-$.}
+\begin{align}
+    \gammai^+ &= \ai+\aid,\label{eq:operatorMajoranaPlus}\\
+    \gammai^- &= \iu(\ai-\aid)\label{eq:operatorMajoranaMinus},
+\end{align}
+gdzie $L$ to liczba węzłów, a operatory $\ai,\aid$ spełniają relacje antykomutacji dla fermionów:
+\begin{equation}
+\{ \ai,\ajd \} = \deltaij, \,\,\,\{\aid,\ajd\}=0.\label{eq:aidtCommStandard} 
+\end{equation}
+Tak zdefiniowane operatory są hermitowskie $(\gammai^\alpha)^\dagger=\gammai^\alpha$, a ich kwadrat jest równy operatowi jednostkowemu $(\gammai^\alpha)^2=\bbone$, (gdzie $\alpha=\pm$). Z uwagi na wymienione własności, dla operatorów Majorany $\gammai$  nie istnieje analogiczny operator liczby cząstek $\ni=\aid\ai$  jak w przypadku operatorów kreacji $\aid$ i anihilacji $\ai$.
+Można pokazać, że takie operatory spełniają następującą relację antykomutacji
+\begin{equation}
+    \{ \gammai^\alpha, \gammaj^\beta\} = 2\deltaij \deltaab.\label{eq:majoranaCom}
+\end{equation}
+Transformacja odwrotna jest następująca:
+\begin{align}
+    \aid &= \tfrac12 \left(\gammai^++\iu \gammai^-\right),\\
+    \ai &= \tfrac12 \left(\gammai^+-\iu \gammai^-\right).
+\end{align}
+Odwrotna transformacja ma interesującą interpretację. 
+Każdy stan fermionowy, $|0\rangle$ pusty albo $|1\rangle$ zapełniony, konstruujemy z dwóch operatorów Majorany (patrz rysunek~\ref{fig:fermionConstruction}).
+Zbiór operatorów Majorany stanowi bardzo wygodną bazę operatorów $\majoranaBase=\{\gammai^\alpha\}$, która może zostać wykorzystana do opisu \MZM. 
+
+
+Ważnym operatorem jest operator parzystości $\parity_i$, który można w bazie operatorów Majorany przedstawić w następującej postaci
+\mymarginpar{\footnotesize
+\input{04-Includes/Figures/tikz/MajoranaTransform.tex}
+\captionof{figure}{Konstrukcja stanu fermionowego z operatorów Majorany.}
+\label{fig:fermionConstruction}
+}
+\begin{equation}
+    \parity_i = 1-2\ni = \iu \gammai^+\gammai^-.\label{eq:parity}
+\end{equation}
+Operator ma dwie wartości własne $\pm 1$: $+1$ dla stanu nieobsadzonego oraz $-1$ dla stanu obsadzonego.
+W późniejszych rozdziałach operator parzystości zostanie wykorzystany do opisu działania qubitu na bazie \MZM.
+Wymnażając wszystkie operatory parzystości $\parity_i$ --- takie operatory komutują ze sobą $[\parity_i,\parity_j]=0$ --- można skonstruować całkowity operator parzystości układu
+\begin{equation}
+    \parity = \prod_i \parity_i.\label{eq:totalParity}
+\end{equation}
+Taki operator ma dwie wartości własne $\pm1$. Wartości własne numerują stany z parzystą i~nieparzystą całkowitą liczbą cząstek w układzie.\\
+
+Operatory Majorany zdefiniowane w równaniach~\labelcref{eq:operatorMajoranaPlus,eq:operatorMajoranaMinus} stanowią ortonormalny zbiór operatorów  $\majoranaBase$ z iloczynem skalarnym\footnote{Dowód można znaleźć w~dodatku~\ref{chap:derivations}.}
+\begin{equation}
+    (\gammai^\alpha|\gammaj^\beta) = \deltaij \deltaab,\label{eq:majoranaOrthogonality}
+\end{equation}
+gdzie $(A|B) = \Tr(AB)/\Tr(\bbone)$ to iloczyn Hilberta--Schmidta operatorów.
+Ortogonalność tych operatorów została wykorzystana w późniejszych rozdziałach do zaprojektowania algorytmu do znajdowania \MZM\ w danych układach.
+Bazę operatorów Majorany $\majoranaBase$ można rozszerzyć o kombinację operatorów Majorany wyższych rzędów
+\begin{equation}
+    (\Upsilon^1_{\mathfrak{im}}=\gammaii_{i}^{\,\,m}),\,\,
+    \Upsilon^3_{\mathfrak{im}}=\iu\gammaii_{i_1}^{\,\,m_1}
+    \gammaii_{i_2}^{\,\,m_2}
+    \gammaii_{i_3}^{\,\,m_3}, \,
+    \dots, \Upsilon^{2M+1}_{\mathfrak{im}}=\iu^M\gammaii_{i_1}^{\,\,m_1}\cdots\gammaii_{i_{2M+1}}^{\,\,m_{2M+1}}.
+\end{equation}
+Nieparzysta liczba operatorów w konstrukcji $\Upsilon^{2M+1}$ jest kluczowa.
+Jeśli rozszerzalibyśmy bazę $\majoranaBase$ o parzystą kombinację operatorów $\gammai^\alpha$, stracilibyśmy warunek dotyczący ortogonalnych operatorów bazy \eqref{eq:majoranaOrthogonality}.
+Natomiast, po rozszerzeniu bazy $\majoranaBase$ o dowolne  kombinacje zawierające nieparzystą liczbę operatorów $\gammai^\alpha$, t.j. $\Upsilon^3_{\mathfrak{im}},\Upsilon^5_{\mathfrak{im}},\dots, \Upsilon^{2M+1}_{\mathfrak{im}}$,  wszystkie operatory $\gammai\in\majoranaBase$ dalej spełniają równania~\labelcref{eq:majoranaCom0,eq:majoranaOrthogonality,eq:majoranaOperatorHermitian,eq:majoranaOperatorOne}, a zatem stanowią ortogonalny zbiór operatorów Majorany.
+W rozprawie doktorskiej skupimy się na konstrukcji \MZM\ wyłącznie bazując na bazie skonstruowanej z pojedynczych operatorów $\gammai^m$ ($\Upsilon^1_{\mathfrak{im}}$).
+W pracy~\cite{wieckowski.maska.2018} sprawdzaliśmy wyrazy $\Upsilon^3_{\mathfrak{im}}$, ale ich wpływ był znikomy podczas konstrukcji \MZM\ w badanym zagadnieniu.
+Wyższe wyrazy $\Upsilon^{2M+1}$, $M>0$, nie są takie istotne do rozwiązywania problemów rozważanych w rozprawie doktorskiej.
+Wszelkie poszukiwania \MZM\ w układach przedstawionych w tej rozprawie doktorskiej ograniczone są do poszukiwania kombinacji lokalnych operatorów Majorany~\cite{wieckowski.maska.2018}.
+
+\ornament
+
+\section{Definicja zerowych modów Majorany}\label{sec:MZMdef}
+\glslink{MZM}{Zerowe mody Majorany (ang. Majorana zero modes, MZM)} $\Gammai$ to są operatory Majorany $\gammai$, które dodatkowo są całkami ruchu.
+Matematyczna definicja  \MZM\ jest następująca~\cite{sarma.freedman.2015,wieckowski.maska.2018,wieckowski.ptok.2019}:
+\begin{align}
+\Gammai^\dagger &= \Gammai,\label{eq:MZMherm}\\
+[\hatH, \Gammai] &= 0,\label{eq:MZMcom}\\
+\{\Gammai,\Gammaj\} &= 2\deltaij.\label{eq:MZManticom}
+\end{align}
+\MZM\ są to operatory hermitowskie \eqref{eq:MZMherm}, komutują z hamiltonianem \eqref{eq:MZMcom}
+oraz antykomutują ze sobą~\eqref{eq:MZManticom} --- spełniają identyczne relacje antykomutacji jak operatory Majorany \eqref{eq:majoranaCom0}.
+Naturalną bazą dla takich operatorów są operatory Majorany $\gammai$. 
+\MZM\ w bazie operatorów Majorany $\majoranaBase$ ma następującą postać
+\begin{equation}
+    \Gammaii_n = \sum_i \alphai^{n}\, \gammai,
+\end{equation}
+gdzie $\alphai^n\in\realNumbers$.
+W bazie $\majoranaBase$ skonstruowanej z $\sites$ par lokalnych operatorów, \labelcref{eq:operatorMajoranaPlus,eq:operatorMajoranaMinus}, $\Gammaii_n$ ma następującą postać
+\begin{equation}
+    \Gammaii_n = \sum_{m=\pm} \sum_{i=1}^{\sites} \alphai^{m,n}\, \gammai^m,\label{eq:mzmBase}
+\end{equation}
+gdzie na współczynniki $\alphai^m$ nakłada się warunki normalizacyjne
+\begin{equation}
+    \sum_m\sum_i (\alphai^{m,n})^2=1.
+\end{equation}
+Warunki normalizacyjne są kluczowe --- bez nich nie było by spełnione równanie
+\eqref{eq:MZManticom}.
+
+\ornament
+
+\section{Model Kitaeva}\label{sec:kitaev}
+
+Po dość abstrakcyjnym wstępie matematycznym, pora na przedstawienie prostego modelu, w którym można zrealizować \MZM.
+Przełomowa praca \textit{Unpaired Majorana fermions in quantum wires}~\cite{kitaev.2001} autorstwa Alexeia Kitaeva (cytowania: 3148, stan na 5 lutego 2020 roku), rozpoczęła okres burzliwego zainteresowania fizyków z całego świata fizyką związaną z tematyką nadprzewodnictwa oraz topologicznych komputerów kwantowych.
+Zaprezentowana w~tej sekcji analiza modelu Kitaeva bazuje na oryginalnej pracy Kitaeva~\cite{kitaev.2001}.
+
+Model Kitaeva \cite{kitaev.2001}, to najprostszy model mikroskopowy, który w pewnym zakresie parametrów, może realizować \MZM.
+Model ten można opisać za pomocą następującego hamiltonianu
+\begin{equation}
+    \hatH_{\text{Kitaev}} = 
+    \underbrace{\sum_{\langle i,j\rangle}\left(\t0 \, \aid \aj + \hc\right)}_{\hatH_{{\text{kin}}}}+
+    \underbrace{\sum_{\langle i,j\rangle}\left(\DeltaSC \aid \ajd+\hc\right)}_{\hatH_{\text{prox}}}
+     + \underbrace{\sum_i \mui \ni}_{\hatH_{\muuniform}},\label{eq:kitaevHamiltonian}
+\end{equation}
+gdzie $\aid/\ai$ to odpowiednio operator kreacji/anihilacji bezspinowego fermionu w węźle $i$, $\t0$~to~całka przeskoku, $\DeltaSC$ to przerwa nadprzewodząca, $\mui$ potencjał chemiczny, $\ni=\aid\ai$ operator liczby cząstek.
+
+W celu pokazania, że model rzeczywiście może zawierać \MZM, rozważymy pewne specjalne przypadki:\footnote{Wyprowadzenie można znaleźć w dodatku~\ref{chap:derivations}.}
+\begin{enumerate}
+    \item $\t0=\DeltaSC=0,\mui>0$,
+Hamiltonian \eqref{eq:kitaevHamiltonian} przyjmie wtedy postać
+\begin{equation}
+    \hatH_{\text{triv}} = \sum_i \mui \ni = \tfrac12\sum_i \mui\left(1-\iu\gammai^+\gammai^-\right).\label{eq:kitaevHamiltonianTriv}
+\end{equation}
+Układ jest w \textit{fazie trywialnej} --- brak \MZM\ w układzie --- nie istnieją takie kombinacje~\eqref{eq:mzmBase}, które komutują z hamiltonianem.
+Stan podstawowy takiego hamiltonianu będzie jednym ze stanów bazowych przestrzeni Hilberta $\hilbertSpace$ zgodnie z rozkładem $\mui$.\footnote{Dla $\mui>0$ stanem podstawowym będzie stan $|0\cdots0\rangle$.}
+    
+    \item \label{enum:topo} $\t0=\DeltaSC>0,\mui=0$,
+    w tym przypadku hamiltonian \eqref{eq:kitaevHamiltonian} przyjmie postać
+\begin{equation}
+    \hatH_{\text{topo}} = \iu \sum_{\langle i,j\rangle}\t0\,\gammai^-\gammaj^+.\label{eq:kitaevHamiltonianTopo}
+\end{equation}
+Załóżmy, że $\sites$ węzłów formuje łańcuch $\langle i,j\rangle \to \langle i,i+i\rangle$ --- jednowymiarowy układ z otwartymi warunkami brzegowymi oraz $\t0 = t^0$ jest jednorodne w układzie.
+Taki układ jest w \textit{fazie topologicznej} --- zawiera dwie, zlokalizowane \MZM\ znajdujące się na brzegach układu.
+Hamiltonian takiego układu jest następujący 
+\begin{equation}
+\hatH_{\text{topo}}^{\text{chain}} = \iu\, t^0\sum_{i=1}^{\sites-1}\gammai^-\gammaii_{i+1}^+.\label{eq:kitaevHamiltonianTopoChain}
+\end{equation}
+W hamiltonianie brakuje operatorów $\gammaii_1^+$ oraz $\gammaii_{\sites}^-$.
+Takie operatory oczywiście komutują z hamiltonianem,
+są całkami ruchu 
+\begin{equation}
+[\hatH_{\text{topo}}^{\text{chain}},\gammaii_1^+]=
+[\hatH_{\text{topo}}^{\text{chain}},\gammaii_{\sites}^-]=
+0,
+\end{equation}
+a zatem to są \MZM\ w takim układzie: $\Gammaii_1=\gammaii_1^+$, $\Gammaii_2 = \gammaii_{\sites}^-$.
+\end{enumerate}
+Te dwa przypadki ilustrują dwa sposoby parowania operatorów Majorany, patrz rysunek~\ref{fig:mzmPhases}. 
+W pierwszym przypadku operatory Majorany parowane są na tym samym węźle --- mody fermionowe budowane są w obrębie danego węzła.
+W drugim przypadku operatory Majorany parowane są na sąsiednich węzłach --- dwa operatory, na brzegach układu są niesparowane, czyli są \MZM. 
+
+\begin{figure}
+    \centering
+    \input{04-Includes/Figures/tikz/phases.tex}
+    \caption[Ilustracja faz topologicznych w modelu Kitaeva]{Ilustracja faz topologicznych w modelu Kitaeva (a) faza trywialna (b) faza topologiczna.}
+    \label{fig:mzmPhases}
+\end{figure}
+
+Wróćmy jeszcze do hamiltonianu \eqref{eq:kitaevHamiltonianTopoChain}.
+Hamiltonian można rozwiązać wprowadzając nowe operatory fermionowe:
+\begin{align}
+    \widetilde\ai&=\tfrac12(\gammaii_{i+1}^+-\iu\gammai^-),\label{eq:fermionMode1}\\
+    \aidt&=\tfrac12(\gammaii_{i+1}^++\iu\gammai^-),\label{eq:fermionMode2}
+\end{align}
+hamiltonian przyjmie wtedy następującą postać\footnote{Wyprowadzenie można znaleźć w dodatku \ref{chap:derivations}.}
+\begin{equation}
+    \hatH_{\text{topo}}^{\text{chain}} = -t^0\sum_{i=1}^{\sites-1}\left(1-2\nit\right) = -t^0\sum_{i=1}^{\sites-1} \widetilde\parity_i,\label{eq:kitaevHamiltonianTopoChainFermions}
+\end{equation}
+gdzie $\nit=\aidt\widetilde\ai$ i $\widetilde \parity_i = 1-2\nit$. 
+Dla $t^0>0$ stan podstawowy tego hamiltonianu odpowiada sytuacji kiedy nie ma cząstek  w węzłach $i=1,\dots,\sites-1$, wszystkie $\nit$ dla podanego $i$ są nieobsadzone.
+W hamiltonianie brakuje operatora $\nLt$, a więc niezależnie od tego czy stan $\nLt$ jest obsadzony czy nie, nie zmienia to energii układu (cząstka o energii $\Energy=0$).
+Wniosek z tego jest następujący: układ posiada zdegenerowany stan podstawowy, jeden  z nieparzystą liczbą cząstek $\odd$ (ang. \textit{odd}) oraz drugi z parzystą liczbą cząstek $\even$ (ang. \textit{even}).
+Oczywiście te stany układu są o innej parzystości:
+\begin{align}
+ \widetilde \parity_{\sites} \odd& =    \iu \gammaii_1^+\gammaii_{\sites}^- \odd = -\odd,\label{eq:parityKitaev1}\\
+ \widetilde \parity_{\sites}\even& =    \iu \gammaii_1^+\gammaii_{\sites}^- \even = +\even.\label{eq:parityKitaev2}
+\end{align}
+Degeneracja stanu podstawowego jest warunkiem koniecznym\footnote{Nie jest to natomiast warunek wystarczający.} istnienia \MZM.
+W wielu pracach autorzy wykorzystują degenerację jako podstawową przesłankę dotyczącą istnienia \MZM\ w zakresie danych parametrów.
+\vspace{0.4cm}
+
+Oczywiście, \MZM\ mogą istnieć w modelu Kitaeva poza  szczególnym przypadkiem opisanym w pkt. \ref{enum:topo}.
+Rozważmy jednorodny hamiltonian \eqref{eq:kitaevHamiltonian} dla jednowymiarowego układu o otwartych warunkach brzegowych (łańcuch)\vspace{0.2cm}
+\begin{equation}
+    \hatH_{\text{Kitaev}}^{\text{chain}} = \sum_{i=1}^{\sites-1}
+    \left[
+    \left(\tuniform \, \aid \aii_{i+1} + \DeltaSCuniform\, \aid \aidi_{i+1}\right)
+    + \hc\right] + \sum_{i=1}^{\sites} \muuniform\ni.
+\end{equation}\vspace{0.2cm}
+Dla takiego modelu, kiedy $|\DeltaSCuniform|>0$,
+możemy wyróżnić dwie fazy: \textit{topologiczną} i \textit{trywialną}~\cite{kitaev.2001}.
+Można pokazać analitycznie, że faza topologiczna jest obecna dla $|\muuniform|\le 2\tuniform$, a faza trywialna dla $|\muuniform|> 2\tuniform$~\cite{kitaev.2001}.
+\MZM\ mogą się pojawić tylko w tej pierwszej fazie.
+Należy tutaj podkreślić, że te warunki opisujące granice faz są spełnione jedynie w granicy termodynamicznej.
+Dodatkowo w skończonych układach komutator~\eqref{eq:MZMcom} nie znika (poza szczególnym przypadkiem $\DeltaSC=|\tuniform|$).
+Związane jest to bezpośrednio z rozkładem przestrzennym \MZM, a~bardziej precyzyjnie z ich przekrywaniem się.
+\MZM\ zanikają wykładniczo od brzegów nanodrutu~\cite{kitaev.2001,kells.2015,katsura.schuricht.2015}.
+\vspace{0.4cm}
+
+Warto tutaj wspomnieć, że w przypadku  modelu Kitaeva rozszerzonego o oddziaływania wielociałowe, wyrażenie opisujące granicę tych dwóch faz jest nieco bardziej złożone~\cite{wieckowski.maska.2018,thomale.rachel.2013,katsura.schuricht.2015}.
+Istnieje kilka metod badania obecności \MZM\ w układach z oddziaływaniami wielociałowymi, w tym kilka wskaźników sprawdzających istnienie faz topologicznych w takich układach~\cite{gergs.fritz.2016}. 
+W tej rozprawie doktorskiej tematem przewodnim pracy są układy zawierające oddziaływania wielociałowe.
+Z teoretycznego punktu widzenia, badanie kwantowych układów z oddziaływaniami wielociałowymi jest relatywnie trudnym zadaniem.
+Istnieją wyrafinowane metody, dla przykładu \DMRG, które umożliwiają badanie układów zawierających tysiące węzłów, ale skuteczność tej metody jest ograniczona do badania krótko-zasięgowych oddziaływań.
+Natomiast metoda \ED\  ograniczona jest tylko do relatywnie małych układów ($\sites\sim20$)~\cite{kozarzewski.mierzejewski.2019}, 
+ale umożliwia badanie dowolnych oddziaływań, również tych dalekozasięgowych~\cite{wieckowski.ptok.2019}.
+
+\ornament
+
+%\section{Teoria grafów, a mody zerowe Majorany}
+%
+%Okazuje się, że dla modelu Kitaeva liczbę dostępnych \MZM\ w układzie można powiązać bezpośrednio ze stowarzyszonym z układem grafem skierowanym~\cite{future.pubication}.

@@ -1,0 +1,648 @@
+\chapter{Wybrane dowody i wyprowadzenia}
+\label{chap:derivations}
+
+W tym dodatku zamieszczono dowody i wyprowadzenia wybranych równań zaprezentowanych w rozprawie doktorskiej.
+
+%\ornament
+
+\section*{Równanie \eqref{eq:majoranaOrthogonality}}
+
+\begin{flalign}
+    (\gammai^\alpha | \gammaj^\beta )  &= \Tr (\gammai^\alpha \gammaj^\beta) / \Tr(\bbone) = \Tr\left(\tfrac12[\gammai^\alpha,\gammaj^\beta]+\tfrac12\{\gammai^\alpha,\gammaj^\beta\}\right)/\Tr(\bbone)=\\
+    &= \tfrac12\Tr(\{\gammai^\alpha,\gammaj^\beta\})/\Tr(\bbone) = \tfrac12\Tr(2\deltaij\deltaab)/\Tr(\bbone) = \deltaij\deltaab&&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:kitaevHamiltonianTriv}}
+
+Korzystając z równania \eqref{eq:parity}: $\ni = \tfrac12(1-\iu\gammai^+\gammai^-)$
+\begin{flalign}
+    \hatH_{\text{triv}} = \sum_i \mui \ni = \tfrac12\sum_i \mui\left(1-\iu\gammai^+\gammai^-\right).&&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:kitaevHamiltonianTopo}}
+\begin{flalign}
+\hatH_{\text{topo}} &= \sum_{\langle i,j\rangle} 
+\left[
+\left(\t0 \aid\aj + \t0 \aid\ajd 
+\right) +\hc
+\right]=\\
+&= \sum_{\langle i,j\rangle}\frac{\t0}{4}
+\left[
+(\gammai^++\iu\gammai^-)(\gammaj^+-\iu\gammaj^-)
++
+(\gammai^++\iu\gammai^-)(\gammaj^++\iu\gammaj^-)
+\right]
++\hc=\\
+&=
+\sum_{\langle i,j\rangle}\frac{\t0}{4}
+\Bigl(\gammai^+\gammaj^+-\iu\gammai^+\gammaj^-
++\iu\gammai^-\gammaj^++\gammai^-\gammaj^-
++\gammai^+\gammaj^++\iu\gammai^+\gammaj^-+\iu\gammai^-\gammaj^+-\gammai^-\gammaj^-\Bigr)+\hc=\\
+&=
+\sum_{\langle i,j\rangle}\frac{\t0}{4}
+\Bigl(2\gammai^+\gammaj^++2\iu\gammai^-\gammaj^+\Bigr)+\hc = 
+\iu\sum_{\langle i,j\rangle}\t0\,\gammai^-\gammaj^+
+&&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:kitaevHamiltonianTopoChainFermions}}
+\begin{flalign}
+\nit &= \aidt\widetilde\ai = \tfrac14(\gammaii_{i+1}^++\iu\gammai^-)(\gammaii_{i+1}^+-\iu\gammai^-)=
+\tfrac14 - \tfrac{\iu}4\gammaii_{i+1}^+\gammai^-
++ \tfrac{\iu}4\gammai^-\gammaii_{i+1}^+ + \tfrac14 = \\
+&=\tfrac12 + \tfrac{\iu}2 \gammai^-\gammaii_{i+1}^+&&
+\end{flalign}
+\begin{flalign}
+\hatH_{\text{topo}}^{\text{chain}} & = \iu\, t^0\sum_{i=1}^{\sites-1}\gammai^-\gammaii_{i+1}^+ = 
+t^0\sum_{i=1}^{\sites-1}\left(2\nit -1\right) = - t^0\sum_{i=1}^{\sites-1}\widetilde\parity_i&&
+\end{flalign}
+
+\ornament
+
+\section*{Równania \normalfont\labelcref{eq:aieven,eq:aiodd,eq:aideven,eq:aidodd}}
+W dowodach skorzystano z równań \labelcref{eq:aidtComm,eq:parityiodd,eq:parityieven}.
+
+\begin{flalign}
+\widetilde\parity_i\even_i &= \even_i\\
+(1-2\aidt\widetilde\ai)\even_i &= \even_i\\
+\aidt\widetilde\ai\even_i &= 0\\
+\event_i\aidt\widetilde\ai\even_i &= 0\\
+\| \widetilde\ai \even_i \| &= 0\\
+\widetilde\ai\even_i &= 0
+\end{flalign}
+
+
+\begin{flalign}
+\widetilde\parity_i\odd_i & = -\odd_i\\
+(1-2\aidt\widetilde\ai)\odd_i &= -\odd_i\\
+(1-\aidt\widetilde\ai)\odd_i &= 0\\
+\widetilde\ai\aidt\odd_i &= 0\\
+\oddt_i\widetilde\ai\aidt\odd_i &= 0\\
+\|\aidt\odd_i\| &= 0\\
+\aidt\odd_i & = 0
+\end{flalign}
+
+\begin{flalign}
+\widetilde\parity_i(\aidt \even_i) = (1-2\aidt\widetilde\ai)\aidt\even_i = \aidt \even_i - 2\aidt(1-\aidt\widetilde\ai)\even_i = -\aidt\even_i
+\end{flalign}
+Wektor $\aidt\even_i$ jest wektorem własnym operatora $\widetilde\parity_i$ z wartością własną $-1$, a zatem następująca relacja jest prawdziwa
+\begin{equation}
+\aidt\even_i = \odd_i.
+\end{equation}
+
+\begin{flalign}
+\widetilde\parity_i(\widetilde\ai \odd_i) = 
+(1-2\aidt\widetilde\ai)\widetilde\ai\odd_i = \
++\widetilde\ai\odd_i
+\end{flalign}
+Wektor $\widetilde\ai\odd_i$ jest wektorem własnym operatora $\widetilde\parity_i$ z wartością własną $+1$, a zatem następująca relacja jest prawdziwa
+\begin{equation}
+\widetilde\ai\odd_i = \even_i.
+\end{equation}
+
+
+\ornament 
+
+
+\section*{Równanie \eqref{eq:propagator1}}
+
+\begin{flalign}
+\propagator & = \exp[\Gammai\Gammaj \omega] = \sum_{n=0}^\infty \tfrac1{n!}\omega^n (\Gammai\Gammaj)^n= \\
+&=\sum_{n=0}^\infty \tfrac1{(2n)!}\omega^{2n} (\Gammai\Gammaj)^{2n}+
+\sum_{n=0}^\infty \tfrac1{(2n+1)!}\omega^{2n+1} (\Gammai\Gammaj)^{2n+1}=\\
+&=\sum_{n=0}^\infty \tfrac{(-1)^n}{(2n)!}\omega^{2n}+
+\sum_{n=0}^\infty \tfrac{(-1)^n}{(2n+1)!}\omega^{2n+1} \Gammai\Gammaj=\cos\omega+\Gammai\Gammaj\sin\omega&&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:propagator2}}
+
+\begin{flalign}
+\propagator^\dagger \Gammai \propagator & = (\cos\omega -\Gammai \Gammaj \sin\omega)\Gammai(\cos\omega+\Gammai\Gammaj \sin\omega) = \\
+&=\Gammai \cos^2\omega + \Gammaj \sin\omega\cos\omega + \Gammaj \sin\omega\cos\omega-\Gammai\sin^2\omega = \\
+&= \Gammai \cos(2\omega) + \Gammaj \sin(2\omega) &&
+\end{flalign}
+
+\ornament
+
+
+\section*{Równania \eqref{eq:yangbaxter1}, \eqref{eq:yangbaxter2}}
+
+
+\begin{flalign}
+\braidOperator\braidOperatori_j &= 
+\tfrac1{\sqrt2}(1+\Gammai\Gammaii_{i+1})
+\tfrac1{\sqrt2}(1+\Gammaj\Gammaii_{j+1})=\\
+&= \tfrac12 (1+\Gammai\Gammaii_{i+1}+\Gammaj\Gammaii_{j+1}+\Gammai\Gamma_{i+1}\Gammaj\Gammaii_{j+1})\overset{|i-j|>1}{=}\\
+&= \tfrac12(1+\Gammai\Gammaii_{i+1}+\Gammaj\Gammaii_{j+1}+\Gammaj\Gammaii_{j+1}\Gammai\Gamma_{i+1}) = \braidOperatori_j\braidOperator&&
+\end{flalign}
+\begin{flalign}
+\braidOperator\braidOperatori_{i+1}\braidOperator & = 
+\left[\tfrac1{\sqrt2}(1+\Gammai \Gammaii_{i+1})\right]
+\left[\tfrac1{\sqrt2}(1+\Gammaii_{i+1} \Gammaii_{i+2})\right]
+\left[\tfrac1{\sqrt2}(1+\Gammai \Gammaii_{i+1})\right]=\\
+&=\tfrac1{2\sqrt2}\left[1+\Gammai\Gammaii_{i+1}+\Gammaii_{i+1}\Gammaii_{i+2}+ \Gammai\Gammaii_{i+2}\right]
+\left[1+\Gammai\Gammaii_{i+1}\right]=\\
+&=\tfrac1{2\sqrt2}[
+1+\Gammai\Gammaii_{i+1}+\Gammaii_{i+1}\Gammaii_{i+2}+ \Gammai\Gammaii_{i+2}+\Gammai\Gammaii_{i+1}-1+\Gammaii_{i+2}\Gammai-\Gammaii_{i+2}\Gammaii_{i+1}]=\\
+&=\tfrac1{2\sqrt2}[2\Gammai\Gammaii_{i+1}+2\Gammaii_{i+1}\Gammaii_{i+2}] =\tfrac1{\sqrt2}[\Gammai\Gammaii_{i+1}+\Gammaii_{i+1}\Gammaii_{i+2}]&&
+\end{flalign}
+
+    \begin{flalign}
+\braidOperatori_{i+1}\braidOperator\braidOperatori_{i+1} & = 
+\tfrac1{\sqrt2}\left[1+\Gammaii_{i+1} \Gammaii_{i+2}\right]
+\tfrac1{\sqrt2}\left[1+\Gammai \Gammaii_{i+1}\right]
+\tfrac1{\sqrt2}\left[1+\Gammaii_{i+1} \Gammaii_{i+2}\right]=\\
+&=\tfrac1{2\sqrt2} \left[  1+\Gammai\Gammaii_{i+1}+\Gammaii_{i+1}\Gamma_{i+2}+\Gammaii_{i+2}\Gammaii_{i}\right]
+[1+\Gammaii_{i+1} \Gammaii_{i+2}]=\\
+&=\tfrac1{2\sqrt2} \left[  1+\Gammai\Gammaii_{i+1}+\Gammaii_{i+1}\Gamma_{i+2}+\Gammaii_{i+2}\Gammaii_{i}+
+\Gammaii_{i+1}\Gammaii_{i+2}+
+\Gammai\Gammaii_{i+2}-1+\Gammai\Gammaii_{i+1}
+\right]
+=\\
+&=\tfrac1{2\sqrt2}[2\Gammai\Gammaii_{i+1}+2\Gammaii_{i+1}\Gammaii_{i+2}] = \tfrac1{\sqrt2}[\Gammai\Gammaii_{i+1}+\Gammaii_{i+1}\Gammaii_{i+2}] &&
+\end{flalign}
+
+\begin{equation}
+\braidOperator\braidOperatori_{i+1}\braidOperator= 
+\braidOperatori_{i+1}\braidOperator
+\braidOperatori_{i+1}
+\end{equation}
+
+\ornament
+
+\section*{Równania \eqref{eq:braidB2}, \eqref{eq:braidB21}}
+
+Korzystając z równań 
+\labelcref{eq:anihilationMZM1,eq:creationMZM2,eq:aidtComm,eq:aieven,eq:aiodd,eq:aideven,eq:aidodd,eq:MZMstateEnum}
+
+\begin{flalign}
+\braidOperatori_2\qstate0 &= \tfrac1{\sqrt2}(1+\Gammaii_2\Gammaii_3)\eeven =
+\tfrac1{\sqrt2}[1+\iu(\widetilde\aii_1-\aidit{1})(\widetilde \aii_2 + \aidit{2})]\eeven=\\
+	&=\tfrac1{\sqrt2}[\eeven-\iu \aidit{1}\aidit{2}\eeven] = \tfrac1{\sqrt2}[\eeven-\iu\oodd] = 
+	\tfrac1{\sqrt2}[\qstate0-\iu\qstate1].
+\end{flalign}
+
+\begin{flalign}
+\braidOperatori_2\qstate1 &= \tfrac1{\sqrt2}(1+\Gammaii_2\Gammaii_3)\oodd =
+\tfrac1{\sqrt2}[1+\iu(\widetilde\aii_1-\aidit{1})(\widetilde \aii_2 + \aidit{2})]\oodd=\\
+	&=\tfrac1{\sqrt2}[\oodd+\iu \widetilde\aii_{1}\widetilde\aii_{2}\oodd] =
+	\tfrac1{\sqrt2}[\oodd+\iu \widetilde\aii_{1}\widetilde\aii_{2}\aidit{1}\aidit{2}\eeven ]=\\
+	&=\tfrac1{\sqrt2}[\oodd-\iu \widetilde\aii_{1}\aidit{1}\widetilde\aii_{2}\aidit{2}\eeven ]
+	=\tfrac1{\sqrt2}[\oodd-\iu (1-\aidit{1}\widetilde\aii_{1})(1-\aidit{2}\widetilde\aii_{2})\eeven ]=\\
+	&=\tfrac1{\sqrt2}[\oodd-\iu\eeven] = 
+	\tfrac1{\sqrt2}[\qstate1-\iu\qstate0]
+\end{flalign}
+
+\ornament
+
+\section*{Równania \eqref{eq:braidB220}, \eqref{eq:braidB221}}
+
+
+\begin{flalign}
+\braidOperatori_2^2\qstate 0 &= \tfrac1{\sqrt2}\braidOperatori_2(\qstate0-\iu\qstate1) = \tfrac12 [\qstate0-\iu\qstate1-\iu(\qstate1 - \iu\qstate0)] = -\iu \qstate1&&
+\end{flalign}
+\begin{flalign}
+\braidOperatori_2^2\qstate 1 = \tfrac1{\sqrt2} \braidOperatori_2 (\qstate1-\iu\qstate0) = \tfrac12[\qstate1 -\iu\qstate0 -\iu(\qstate0-\iu\qstate1)]=-\iu \qstate0&&
+\end{flalign}
+
+
+\ornament
+
+\section*{Równania \eqref{eq:braidYgate}, \eqref{eq:braidHgate}}
+
+\begin{flalign}
+\braidOperatori_1\braidOperatori_2^2\braidOperatori_1^\dagger\qstate0 = \exp(+\iu\tfrac\pi4)
+\braidOperatori_1\braidOperatori_2^2
+\qstate0 = 
+\exp(+\iu\tfrac\pi4)\braidOperatori_1(-\iu)\qstate1 = \qstate1. &&
+\end{flalign}
+\begin{flalign}
+\braidOperatori_1\braidOperatori_2^2\braidOperatori_1^\dagger\qstate1 = \exp(-\iu\tfrac\pi4)\braidOperatori_1\braidOperatori_2^2
+\qstate1 = 
+\exp(-\iu\tfrac\pi4)\braidOperatori_1(-\iu)\qstate0 = -\qstate0. &&
+\end{flalign}
+
+\begin{equation}
+\ygate = \braidOperatori_1\braidOperatori_2^2\braidOperatori_1^\dagger
+\end{equation}
+
+\begin{flalign}
+\braidOperatori_1\braidOperatori_2 \braidOperatori_1\qstate 0 &=\exp(-\iu\tfrac\pi4) \braidOperatori_1^\dagger \braidOperatori_2  \qstate 0 =
+\exp(-\iu\tfrac\pi4)\braidOperatori_1\tfrac1{\sqrt2}(\qstate 0 -\iu\qstate1) =\\ &=-\iu\tfrac1{\sqrt2}(\qstate0+\qstate1)&&
+\end{flalign}
+
+\begin{flalign}
+\braidOperatori_1\braidOperatori_2 \braidOperatori_1\qstate 1 &=\exp(+\iu\tfrac\pi4) \braidOperatori_1 \braidOperatori_2  \qstate 1 =
+\exp(+\iu\tfrac\pi4)\braidOperatori_1\tfrac1{\sqrt2}(\qstate 1 -\iu\qstate0) =\\
+&=-\iu\tfrac1{\sqrt2}(\qstate0-\qstate1)&&
+\end{flalign}
+
+\begin{equation}
+\hadamard = \braidOperatori_1\braidOperatori_2 \braidOperatori_1
+\end{equation}
+
+\ornament
+
+\section*{Równanie \eqref{eq:gammaAvg}}
+
+\begin{flalign}
+    \barGammaii &=  \lim_{\timeNormal\to\infty}\frac1{\timeNormal}\int\limits_0^{\timeNormal}\text d\timeNormal' \Gammaii(\timeNormal')=
+    \lim_{\timeNormal\to\infty}\frac1{\timeNormal}\int\limits_0^{\timeNormal}\text d\timeNormal' \eee^{+\iu \hatH \timeNormal'} \Gammaii \eee^{-\iu \hatH \timeNormal'}=\\
+    &=
+    \lim_{\timeNormal\to\infty}\frac1{\timeNormal}\int\limits_0^{\timeNormal}\text d\timeNormal' \eee^{+\iu \hatH \timeNormal'} \sum_{nm} \qstatet n \Gammaii \qstate m \, \qstate n \qstatet m \eee^{-\iu \hatH \timeNormal'}=\\
+        &=
+    \lim_{\timeNormal\to\infty}\frac1{\timeNormal}\sum_{nm}\int\limits_0^{\timeNormal}\text d\timeNormal' \eee^{-\iu (\Energy_m-\Energy_n) \timeNormal'}  \Gammaii_{nm} \, \qstate n \qstatet m =\\
+    &=\lim_{\timeNormal\to\infty}\sum_{nm}\thetaH{\tfrac1{\timeNormal}-|\Energy_n-\Energy_m|}\,\,\Gammaii_{nm}\,\,\,\qstate n\qstatet m=\label{eq:mzmAvgTheta}\\
+    &= \sum_{\Energy_n=\Energy_m}\,\Gammaii_{nm} \,\,\,\qstate n\qstatet m.&&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:normOpt}}
+    
+Korzystając z własności liniowości iloczynu skalarnego oraz z tożsamości \eqref{eq:barGammabarGamma}
+\begin{flalign}
+ \|(\Gammaii-\barGammaii) \|^2 &=
+ (\Gammaii-\barGammaii|\Gammaii-\barGammaii) = (\Gammaii|\Gammaii) - (\Gammaii|\barGammaii) - (\barGammaii|\Gammaii) + (\barGammaii|\barGammaii)=\\
+ &=1 - (\barGammaii|\barGammaii) = 1 - \| \barGammaii \|^2 .&&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:barGammabarGamma}}
+
+Ostatnia nierówność jest oczywista i wynika z własności przemienności iloczynu skalarnego
+\begin{flalign}
+    (\barGammaii | \Gammaii) = (\Gammaii|\barGammaii).
+\end{flalign}
+Następnie udowodniono ostatnią nierówność bez zakładania granicy $\lim_{\timeNormal\to\infty}$ --- dla dowolnych czasów $\timeNormal$ (jako $Z$ oznaczono $Z=\Tr\,\,\bbone$):
+\begin{flalign}
+    (\barGammaii|\barGammaii) &= \tfrac1Z\Tr(\barGammaii\barGammaii)=\\
+    &=
+    \tfrac1Z\sum_n\qstatet n\left( \sum_{n'm'}\thetaH{\tfrac1{\timeNormal}-|\Energy_{n'}-\Energy_{m'}|}\Gammaii_{n'm'}\qstate {n'} \qstatet {m'}
+    \sum_{k'l'}\thetaH{\tfrac1{\timeNormal}-|\Energy_{k'}-\Energy_{l'}|}\Gammaii_{k'l'}\qstate {k'} \qstatet {l'}\right)\qstate n=\\
+    &=
+    \tfrac1Z\sum_{nn'm'k'l'}
+    \thetaH{\tfrac1{\timeNormal}-|\Energy_{n'}-\Energy_{m'}|}
+    \thetaH{\tfrac1{\timeNormal}-|\Energy_{k'}-\Energy_{l'}|}
+    \Gammaii_{n'm'}
+    \Gammaii_{k'l'}
+    \deltaii{nn'}
+    \deltaii{m'k'}
+    \deltaii{l'n}=\\
+    &=
+    \tfrac1Z\sum_{n'm'}
+    \thetaH{\tfrac1{\timeNormal}-|\Energy_{n'}-\Energy_{m'}|}
+    \thetaH{\tfrac1{\timeNormal}-|\Energy_{m'}-\Energy_{n'}|}
+    \Gammaii_{n'm'}
+    \Gammaii_{m'n'}=\\
+    &=
+    \tfrac1Z\sum_{n'm'}
+    \thetaH{\tfrac1{\timeNormal}-|\Energy_{n'}-\Energy_{m'}|}
+    \Gammaii_{n'm'}
+    \Gammaii_{m'n'}=(\barGammaii|\Gammaii),
+\end{flalign}
+gdzie skorzystano tutaj z równania~\eqref{eq:mzmAvgTheta} oraz z własności funkcji Heaviside'a
+\begin{equation}
+    \thetaHs{x} = \thetaH{x}.
+\end{equation}
+\ornament
+
+
+
+
+
+
+\section*{Równanie \eqref{eq:timeTauAvgDef}}
+
+\begin{flalign}
+\thickbar \Gammaii^{\timeTau} &= \int\limits_{-\infty}^\infty\text d\timeNormal\,\, \Gammaii(\timeNormal) \tfrac{\sin(\timeNormal/\timeTau)}{\pi \timeNormal}=
+\int\limits_{-\infty}^\infty\text d\timeNormal\,\, \eee^{+\iu\hatH \timeNormal}\sum_{nm}\Gammaii_{nm}\qstate n\qstatet m \eee^{-\iu\hatH \timeNormal} \tfrac{\sin(\timeNormal/\timeTau)}{\pi \timeNormal}=
+\\
+&=
+\sum_{nm}\Gammaii_{nm}\qstate n\qstatet m \int\limits_{-\infty}^\infty\text d\timeNormal\,\, \eee^{-\iu(\Energy_m-\Energy_n) \timeNormal} \tfrac{\sin(\timeNormal/\timeTau)}{\pi \timeNormal}=
+\\
+  & 
+ = \sum_{nm}\thetaH{\tfrac{1}{\timeTau}-|\Energy_n-\Energy_m|} \Gammaii_{nm} \qstate n \qstatet m
+  = \sum_{|\Energy_n-\Energy_m|<\tfrac 1{\timeTau}} \Gammaii_{nm} \qstate n \qstatet m &&
+\end{flalign}
+
+\ornament
+
+\section*{Równanie \eqref{eq:standardCorr}}
+
+
+\begin{flalign}
+    (\Gammaii(t)|\Gammaii) &= \Tr(\Gammaii(t)|\Gammaii)/\Tr(\bbone)=
+    \tfrac1Z \sum_{n'} \qstatet {n'}\left(\eee^{+\iu \hatH \timeNormal}\Gammaii \eee^{-\iu \hatH \timeNormal}
+    \Gammaii\right)\qstate {n'}=\\
+    &=
+ \tfrac1Z \sum_{nm}\eee^{\iu (\Energy_m-\Energy_n) \timeNormal}\Gammaii_{nm}
+    \Gammaii_{mn}=
+        \tfrac1Z\sum_{nm}\eee^{\iu(\Energy_m-\Energy_n)\timeNormal}|\qstatet n\Gammaii \qstate m|^2&&
+\end{flalign}
+gdzie $Z=\Tr\,\,\bbone$.
+
+\ornament
+
+\section*{Równanie \eqref{eq:tautimeRelationship}}
+
+
+\begin{flalign}
+    (\barGammaii^{\timeTau}|\Gammaii ) &= \tfrac1Z\sum_{nm}\thetaH{\tfrac1{\timeTau}-|\Energy_n-\Energy_m|} |\qstatet n\Gammaii\qstate m|^2=\\
+    &=
+    \tfrac1Z\sum_{nm} |\qstatet n\Gammaii\qstate m|^2\int\limits_{-\tfrac1{\timeTau}}^{\tfrac1{\timeTau}}
+    \text d\omega \,\, \diracDelta{\omega+\Energy_m-\Energy_n}=
+    \\
+    &=
+    \tfrac1Z\sum_{nm} |\qstatet n\Gammaii\qstate m|^2\int\limits_{-\tfrac1{\timeTau}}^{\tfrac1{\timeTau}}
+    \text d\omega \,\, \tfrac1{2\pi}\int\limits_{-\infty}^{\infty}\text d\timeNormal\,\, \eee^{\iu(\omega+\Energy_m-\Energy_n)\timeNormal}=\\
+    &=
+    \frac1{2\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, \int\limits_{-\infty}^\infty \text d\timeNormal\,\, \eee^{\iu\omega \timeNormal} (\Gammaii(\timeNormal)|\Gammaii)&&
+\end{flalign}
+\ornament
+
+
+\section*{Równanie \labelcref{%
+eq:barGammaGammaVcorr,%
+eq:GammaGammaFourier,%
+eq:barGammaGammaFullcorr}}
+
+Przeprowadzenie dowodu rozpoczęto od policzenia transformaty Fouriera:
+\begin{flalign}
+    (\Gammaii(\omega)|\Gammaii)_I &= \int\limits_{-\infty}^{\infty}\text d\timeNormal\,\, \eee^{\iu\omega\timeNormal} \eee^{-|\timeNormal|/\timeTauI} = 
+    \int\limits_{-\infty}^0\text d\timeNormal\,\,\eee^{\iu\omega\timeNormal}\eee^{\timeNormal/\timeTauI}+
+    \int\limits_{0}^\infty\text d\timeNormal\,\,\eee^{\iu\omega\timeNormal}\eee^{-\timeNormal/\timeTauI}=\\
+    &=
+    \frac{1}{\iu\omega+\tfrac1{\timeTauI}}\eee^{(\iu\omega+\tfrac{1}{\timeTauI})\timeNormal}\biggr|_{-\infty}^0
+    +
+    \frac{1}{\iu\omega-\tfrac1{\timeTauI}}\eee^{(\iu\omega-\tfrac{1}{\timeTauI})\timeNormal}\biggr|_{-\infty}^0
+    =
+    \frac{2\timeTauI}{1+(\omega\timeTauI)^2}.
+    &&
+\end{flalign}
+Z wykorzystaniem tej transformaty Fouriera wykonując proste obliczenia, można pokazać korelację związaną z mechanizmem relaksacji od oddziaływań wielociałowcych:
+\begin{flalign}
+    (\barGammaii^{\timeTau}|\Gammaii )_I &= 
+    \frac1{2\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, \int\limits_{-\infty}^\infty \text d\timeNormal\,\, \eee^{\iu\omega \timeNormal} (\Gammaii(\timeNormal)|\Gammaii)_I = 
+ \frac1{2\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, (\Gammaii(\omega)|\Gammaii)_I=\\
+&=  \frac1{\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, \frac{\timeTauI}{1+(\omega\timeTauI)^2} = 
+\tfrac1{\pi}\arctan\left(\tfrac{\timeTauI}{\timeTau}\right) - 
+\tfrac1{\pi}\arctan\left(-\tfrac{\timeTauI}{\timeTau}\right) = \tfrac2{\pi}\arctan\left(\tfrac{\timeTauI}{\timeTau}\right).
+\end{flalign}
+Analogicznie można obliczyć pełną korelację: uwzględniającą wpływ oddziaływań wielociałowych oraz relaksacji oddziaływania modów Majorany:
+\begin{flalign}
+        (\barGammaii^{\timeTau}|\Gammaii)_{IM} &=  \frac1{2\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, \int\limits_{-\infty}^\infty \text d\timeNormal\,\, \eee^{\iu\omega \timeNormal} (\Gammaii(\timeNormal)|\Gammaii)_{IM} = 
+ \frac1{2\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, (\Gammaii(\omega-\tfrac1{\timeTauM})|\Gammaii)_I= \\
+        &= \frac1{\pi}
+\int\limits_{-\frac1{\timeTau}}^{\frac1{\timeTau}}\text d\omega \,\, \frac{\timeTauI}{1+[(\omega-\tfrac{1}{\timeTauM})\timeTauI]^2} = \\
+        &=
+    \frac1\pi\left
+    \{
+    \arctan\left[\left(\frac1{\timeTau}-\frac1{\timeTauM}\right)
+    \timeTauI
+    \right]
+    +
+    \arctan\left[\left(\frac1{\timeTau}+\frac1{\timeTauM}\right)
+    \timeTauI
+    \right]
+    \right\}.
+\end{flalign}
+
+\ornament
+
+\section*{Równanie~\eqref{eq:gammaPlusGammaMinusOrthogonality}}
+
+Korzystając z założenia, że $\hatH_{ij}\in\realNumbers$ i postaci operatorów $\gammai^\pm$ [równania~\labelcref{eq:operatorMajoranaPlus,eq:operatorMajoranaMinus}]:
+\begin{align}
+    (\bargammai^+|\bargammaj^-)&=(\barai{i}+\baradi{i}|\iu(\barai{j}-\baradi{j})) = 
+    \iu\left( 
+    (\barai{i}|\barai{j})-(\barai{i}|\baradi{j})+(\baradi{i}|\barai{j})-(\baradi{i}|\baradi{j})
+    \right)=\\
+    &=
+    \iu\left( 
+    (\barai{i}|\barai{j})-(\barai{i}|\barai{j})^*+(\baradi{i}|\barai{j})-(\baradi{i}|\barai{j})^*
+    \right)=0.
+\end{align}
+
+
+\ornament
+
+
+\section*{Równanie~\eqref{eq:parityMappingCondition}}
+
+\begin{align}
+    1 &= \qstatet n \barGammaii^2 \qstate n = \qstatet n\biggl(
+    \sum_{n',m':\Energy_{n'}=\Energy_{m'}}\Gammaii_{n'm'} \qstate {n'} \qstatet{m'}
+    \biggr)
+    \biggl(
+    \sum_{n'',m'':\Energy_{n''}=\Energy_{m''}}\Gammaii_{n''m''} \qstate {n''} \qstatet{m''}
+    \biggr)
+    \qstate n=\\
+    &=
+    \sum_{n',m':\Energy_{n'}=\Energy_{m'}}\,
+    \sum_{n'',m'':\Energy_{n''}=\Energy_{m''}}
+    \Gammaii_{n'm'}\Gammaii_{n''m''}
+    \deltaii{nn'}
+    \deltaii{m'n''}
+    \deltaii{m''n}=\\
+    &=\sum_{m:\,\Energy_{n}=\Energy_{m}}\,\Gammaii_{nm}\Gammaii_{mn}
+    =\sum_{m:\,\Energy_{n}=\Energy_{m}}\,|\Gammaii_{nm}|^2
+\end{align}
+
+\ornament
+
+
+
+\section*{Równania~\normalfont\labelcref{eq:shiba1,eq:shiba2,eq:shiba3}}
+
+Skorzystano z postaci transformacji $\shiba$ z równania~\eqref{eq:shiba4}
+\begin{equation}
+\shiba = (\iu \gammaii_{\sites}^-)  \gammaii_{\sites-1}^+ \cdots \gammaii_2^+ (\iu \gammaii_1^-)
+\end{equation}
+i równania sprzężonego
+\begin{equation}
+\shibad = 
+(-\iu \gammaii_1^-) \gammaii_2^+ \cdots \gammaii_{\sites-1}^+  (-\iu\gammaii_{\sites}^-)  
+\end{equation}
+do pokazania, że jest to transformacja unitarna:
+\begin{flalign}
+\shiba \shibad &=         
+(\iu \gammaii_{\sites}^-)  \gammaii_{\sites-1}^+ \cdots \gammaii_2^+ (\iu \gammaii_1^-)
+(-\iu \gammaii_1^-) \gammaii_2^+ \cdots \gammaii_{\sites-1}^+  (-\iu\gammaii_{\sites}^-)  = \bbone\\
+\shibad \shiba &=        \bbone ,&&
+\end{flalign}
+gdzie skorzystano tutaj z własności $(\gammai^\alpha)^2=\bbone$.
+Do transformacji operatorów kreacji i anihilacji warto skorzystać z ich postaci w bazie operatorów Majorany
+$\ai = \tfrac12(\gammai^+-\iu\gammai^-)$, $\aid =\tfrac12(\gammai^++\iu\gammai^-)$.
+Poniżej pokazano, w jaki sposób transformują się operatory Majorany.
+\begin{flalign}
+\shiba \gammai^+ \shibad &= 
+(\iu \gammaii_{\sites}^-)  \gammaii_{\sites-1}^+ \cdots \gammaii_2^+ (\iu \gammaii_1^-)
+\gammai^+
+(-\iu \gammaii_1^-) \gammaii_2^+ \cdots \gammaii_{\sites-1}^+  (-\iu\gammaii_{\sites}^-)=\\
+&=
+\begin{cases}
+(-1)^{\sites}=-1,&i\,\, \text{nieparzyste}\\
+(-1)^{i-1}(-1)^{\sites-i}=1,&i\,\, \text{parzyste}\\
+\end{cases}\,\,=(-1)^i \gammai^+,&&
+\end{flalign}
+gdzie skorzystano tutaj z założenia, że $\sites$ jest nieparzyste oraz z reguł antykomutacji operatorów Majorany $\{\gammai^\alpha,\gammaj^\beta\}=2\deltaij\deltaab$.
+Analogicznie można pokazać transformację operatora $\gammai^-$:
+\begin{flalign}
+\shiba \gammai^- \shibad &= 
+(\iu \gammaii_{\sites}^-)  \gammaii_{\sites-1}^+ \cdots \gammaii_2^+ (\iu \gammaii_1^-)
+\gammai^-
+(-\iu \gammaii_1^-) \gammaii_2^+ \cdots \gammaii_{\sites-1}^+  (-\iu\gammaii_{\sites}^-)=\\
+&=
+\begin{cases}
+(-1)^{\sites-i}(-1)^{i-1}=1,&i\,\, \text{nieparzyste}\\
+(-1)^{\sites}(-1)^{\sites-i}=-1,&i\,\, \text{parzyste}\\
+\end{cases}\,\,=(-1)^i (-1)\gammai^-.&&
+\end{flalign}
+Ostatecznie:
+\begin{flalign}
+\shiba\ai\shibad = \shiba \tfrac12(\gammai^+-\iu\gammai^-)\shibad=
+(-1)^i\tfrac12( \gammai^++\iu\gammai^-) = (-1)^i \aid,&&\label{eq:aishibaderivation}
+\end{flalign}
+\begin{flalign}
+\shiba\aid\shibad = \shiba \tfrac12(\gammai^++\iu\gammai^-)\shibad=
+(-1)^i\tfrac12( \gammai^+-\iu\gammai^-) = (-1)^i \ai.&&\label{eq:aidshibaderivation}
+\end{flalign}
+
+
+\ornament
+
+
+
+\section*{Równanie~\eqref{eq:shiba5}}
+W celu pokazania, że hamiltoniany transformują się tak jak w równaniu~\eqref{eq:shiba5}, należy pokazać, w jaki sposób transformują się wszystkie wyrazy hamiltonianów:
+\begin{itemize}
+\item  część związana z przeskokiem cząstek
+\begin{flalign}
+\shiba\aid\aj\shibad = \shiba\aid\shibad\shiba\aj\shibad = (-1)^{i+j}\ai\ajd = (-1)\ai\ajd=\ajd\ai = (\aid\aj)^\dagger,&&
+\end{flalign}
+\item część związana z kreacją cząstek
+\begin{flalign}
+\shiba\aid\ajd\shibad = \shiba \aid \shibad \shiba \ajd \shibad = (-1)^{i+j}\ai \aj = (-1)\ai\aj = \aj\ai = (\aid\ajd)^\dagger,&&
+\end{flalign}
+\item część związana z potencjałem jednocząstkowym
+\begin{flalign}
+\shiba\nz{i}\shibad=\shiba\aid\shibad\shiba\ai\shibad-\tfrac12=(-1)^{2i}\ai\aid-\tfrac12=1-\aid\ai\tfrac12=-\nz i,&&
+\end{flalign}
+\item część związana z potencjałem dwucząstkowym
+\begin{flalign}
+\shiba\nz i  \nz j \shibad=\shiba\nz i\shibad \shiba \nz j \shibad = (-\nz i)(-\nz j) = \nz i\nz j,&&
+\end{flalign}
+\end{itemize}
+gdzie $i\neq j$ i zgodnie z założeniami nieparzystego $\sites$, układ tworzy dwudzielną sieć, dla której $i+j$ jest liczbą nieparzystą i skorzystano z relacji antykomutacji operatorów fermionowych $\ai\aid+\aid\ai=1$, unitarności $\shibad\shiba=\bbone$ i transformacji \labelcref{eq:aishibaderivation,eq:aidshibaderivation}.
+Wszystkie wyrazy poza wyrazem związanym z potencjałem jednocząstkowym, są niezmiennicze względem transformacji $\shiba$.
+Należy zwrócić jedynie uwagę, że poza zmianą znaku w $\mui(\timeNormal)$, transformacja $\shiba$ zmienia $\DeltaSC\to\DeltaSC^*$, co nie wpływa na spektrum energetyczne hamiltonianu.
+Ostatecznie pokazano, że
+\begin{equation}
+    \shiba\hatH_{\trijunction{12}}(\DeltaSC)\shibad=\hatH_{\trijunction{34}}(\DeltaSC).\label{eq:hamiltonianShibaTransformDerivation}
+\end{equation}
+
+
+\ornament
+
+\section*{Równanie~\eqref{eq:shiba6}}
+Lokalny operator parzystości transformuje się w następujący sposób:
+\begin{flalign}
+\shiba\parity_i\shibad &= \shiba(1-2\aid\ai)\shibad = 1-2\shiba\aid\shibad\shiba\ai\shibad =\\
+&=1-2(-1)^i\ai(-1)^i\aid = 1-2(1-\aid\ai)=-1+2\aid\ai=-\parity_i,
+\end{flalign}
+a całkowity operator parzystości
+\begin{flalign}
+\shiba\parity\shibad=\prod_i \shiba\parity_i\shibad = \prod_i (-1)\parity_i = (-1)^{\sites}\parity = -\parity,&&
+\end{flalign}
+gdzie skorzystano z relacji antykomutacji operatorów fermionowych $\ai\aid+\aid\ai=1$, unitarności $\shibad\shiba=\bbone$ i transformacji \labelcref{eq:aishibaderivation,eq:aidshibaderivation} oraz założenia nieparzystego $\sites$.
+
+\ornament
+
+\section*{Równanie~\labelcref{eq:shiba7,eq:shiba8}}
+
+Zagadnienie własne hamiltonianu $\hatH_{\trijunction{12}}$:
+\begin{align}
+    \hatH_{\trijunction{12}}(\DeltaSC)\qstate n &= \Energy_n \qstate n,\\
+    \shiba\hatH_{\trijunction{12}}(\DeltaSC)\qstate n &= \Energy_n \shiba\qstate n,\\
+    \shiba\hatH_{\trijunction{12}}(\DeltaSC)\shibad\shiba\qstate n &= \Energy_n \shiba\qstate n,\\
+    \hatH_{\trijunction{34}}(\DeltaSC^*)\shiba\qstate n &= \Energy_n \shiba\qstate n,
+\end{align}
+gdzie skorzystano z transformacji \eqref{eq:hamiltonianShibaTransformDerivation}, unitarności $\shibad\shiba=\bbone$.
+Ostatnie równanie to zagadnienie własne hamiltonianu $\hatH_{\trijunction{34}}(\DeltaSC^*)$, a stanem własnym jest $\shiba\qstate n$.
+
+Stan własny $\qstate n$ ma określoną parzystość $p_n$
+\begin{align}
+\parity \qstate n &= p_n \qstate n,
+\end{align}
+a stan własny $\shiba\qstate n$ ma parzystość $p_n'$
+\begin{align}
+\parity \shiba\qstate n &= p_n' \shiba\qstate n,\\
+\shibad\parity \shiba\qstate n &= p_n' \shibad\shiba\qstate n,\\
+-\parity\qstate n &= p_n' \qstate n,\\
+\parity\qstate n &= -p_n' \qstate n.
+\end{align}
+Na podstawie tych rozważań wynika, że stan $\shiba \qstate n$ ma parzystość $p_n'=-p_n$ która  jest przeciwna do parzystości stanu $\qstate n$.
+Skorzystano tutaj z postaci transformacji odwrotnej 
+\begin{flalign}
+\shibad \parity \shiba = -\shibad (\shiba\parity\shibad)\shiba = -\parity.
+\end{flalign}
+    
+
+
+\ornament
+
+
+\section*{Równanie~\eqref{eq:qubitPhaseFactorsGained}}
+
+\begin{flalign}
+    \qstate{\psi(2\timeTotal)}  &=  
+    \eee^{\iu (\barPhiDyni{e,\,\trijunction{12}}+
+     \barPhiDyni{e,\,\trijunction{34}}+
+     \barPhiGeoi{e,\,\trijunction{12}} +
+    \barPhiGeoi{e,\,\trijunction{34}})} 
+    a_0
+    \qstate{0}_{\timeNormal=0}+\nonumber\\
+    &\qquad\qquad
+    \eee^{\iu (\barPhiDyni{o,\,\trijunction{12}}+
+    \barPhiDyni{o,\,\trijunction{34}} +
+    \barPhiGeoi{o,\,\trijunction{12}} +
+    \barPhiGeoi{o,\,\trijunction{34}})} 
+    a_1
+    \qstate{1}_{\timeNormal=0}=\\
+    &=
+     \eee^{\iu (\barPhiDyni{e,\,\trijunction{12}}+
+     \barPhiDyni{e,\,\trijunction{34}}+
+     \barPhiGeoi{e,\,\trijunction{12}} +
+    \barPhiGeoi{e,\,\trijunction{34}})} \nonumber\\
+    &\qquad\qquad\left(
+    a_0 \qstate 0_{\timeNormal=0} + 
+        \eee^{-\iu (\barDeltaPhiDyni{o,\,\trijunction{12}}+
+    \barDeltaPhiDyni{o,\,\trijunction{34}} +
+    \barDeltaPhiGeoi{o,\,\trijunction{12}} +
+    \barDeltaPhiGeoi{o,\,\trijunction{34}})} 
+    a_1
+    \qstate{1}_{\timeNormal=0}
+    \right)=\\
+    &=\eee^{\iu\chi}\phaseGate\qstate{\psi}
+    ,
+\end{flalign}
+
+
+
+\ornament

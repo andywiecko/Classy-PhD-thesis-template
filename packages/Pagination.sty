@@ -1,0 +1,21 @@
+\usepackage{fancyhdr}
+\fancyhead[LE,RO]{\rmfamily \small \swshape \nouppercase \rightmark}
+\fancyhead[LO,RE]{\rmfamily \small \swshape \nouppercase \leftmark}
+
+
+\makeatletter
+\renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}%
+\thispagestyle{plain}%
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+\def\emptydoublepage{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}%
+\thispagestyle{empty}%
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+
+
+\makeatother

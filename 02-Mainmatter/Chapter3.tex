@@ -1,0 +1,403 @@
+\chapter{Topologiczne obliczenia kwantowe}\label{chap:topologicalQuantumComputing}
+
+\section*{Opis rozdziału}
+
+W tym rozdziale przedstawione zostaną najważniejsze cechy \MZM, które sprawiają, że są one tak interesującym tematem badawczym.
+Zaprezentowane zostanie tutaj, w jaki sposób można wykorzystać \MZM\ do wykonywania obliczeń kwantowych i konstrukcji podstawowych bramek kwantowych.
+Przedstawiona analiza w tym rozdziale została opracowana na podstawie prac
+\cite{stanescu.2016,leijnse.flensberg.2012,sarma.freedman.2015,nayak.simon.2008,ivanov.2001,lahtinen.pachos.2017,field.simula.2018}.
+
+\section{Statystyka nieabelowa i grupa warkoczowa}\label{sec:nonabelianStatistics}
+
+W tym rozdziale skupiono się na rozważaniach bardziej ogólnych.
+Założono, że w układzie znajduje się $2M$ \MZM: $\Gammaii_1,\dots,\Gammaii_{2M}$, które spełniają wszystkie założenia~\labelcref{eq:MZMherm,eq:MZMcom,eq:MZManticom} opisane w sekcji~\ref{sec:MZMdef}.
+W identyczny sposób, jak dokonano to w sekcji~\ref{sec:kitaev} w równaniach \labelcref{eq:fermionMode1,eq:fermionMode2}, z \MZM\ można skonstruować $M$  modów fermionowych:
+\begin{align}
+    \widetilde\ai  &= \tfrac12(\Gammaii_{2i-1} - \iu\, \Gammaii_{2i}),\quad i=1,\dots,M\label{eq:anihilationMZM1}\\
+    \aidt &= \tfrac12(\Gammaii_{2i-1} + \iu\, \Gammaii_{2i}),\label{eq:creationMZM2}
+\end{align}
+gdzie te fermiony spełniają standardowe relacje antykomutacji dla fermionów [równanie~\eqref{eq:aidtCommStandard}]:
+\begin{equation}
+\{ \widetilde\ai,\ajdt \} = \deltaij, \,\,\,\{\aidt,\ajdt\}=0.\label{eq:aidtComm} \end{equation}
+W odróżnieniu od równań~\eqref{eq:fermionMode1},~\eqref{eq:fermionMode2}, gdzie tylko jeden fermion -- $\nLt$ -- miał zerową energię, każdy fermionowy mod utworzony z $\Gammai$ ma zerową energię. 
+Z $2M$ \MZM\ można utworzyć $M$ modów fermionowych.
+Każdy z tych fermionowych modów $\nit=\aidt\widetilde\ai$ może być pusty $\even$ lub zapełniony $\odd$ i może należeć odpowiednio do podprzestrzeni z parzystą lub nieparzystą liczbą cząstek.
+Z tego wynika, że w układzie zawierającym $2M$ \MZM\ musi istnieć $2^M$ zdegenerowanych stanów podstawowych.
+Te stany można ponumerować wartościami własnymi operatorów parzystości
+\begin{equation}
+    \widetilde\parity_i = 1- 2\nit = \iu\, \Gammaii_{2i-1}\Gammaii_{2i}.
+\end{equation}
+Taki operator parzystości, analogicznie jak w równaniach \eqref{eq:parityKitaev2} oraz \eqref{eq:parityKitaev2}, przyjmuje dwie wartości własne $\pm1$:
+\begin{align}
+    \widetilde\parity_i\odd_i &= -\odd_i,\label{eq:parityiodd}\\
+    \widetilde\parity_i \even_i &= +\even_i,\label{eq:parityieven}
+\end{align}
+gdzie wprowadzona notacja $\even_i$ oznacza stan własny operatora parzystości $\widetilde\parity_i$, analogicznie jak w równaniach~\eqref{eq:parityKitaev1}, \eqref{eq:parityKitaev2}.
+Takie operatory komutują ze sobą:
+\begin{equation}
+    [\widetilde \parity_i,\widetilde \parity_j] =0.
+\end{equation}
+Operatory fermionowe $\widetilde\ai$, $\aidt$ transformują stany podstawowe pomiędzy różnymi sektorami parzystości, posiadają analogiczne działanie jak operatory drabinkowe:\footnote{Dowód można znaleźć w~dodatku~\ref{chap:derivations}.}
+\begin{align}
+    \widetilde\ai\odd_i &= \even_i,\label{eq:aieven}\\[1ex]
+    \widetilde\ai \even_i &= 0,\label{eq:aiodd}\\[1ex]
+    \aidt \odd_i &= 0,\label{eq:aideven}\\[1ex]
+    \aidt \even_i &= \odd_i.\label{eq:aidodd}
+\end{align}
+Z iloczynu operatorów parzystości można skonstruować całkowity operator parzystości w~układzie
+\begin{equation}
+    \widetilde\parity = \prod_{i=1}^M \widetilde \parity_i = \iu^M\prod_{j=1}^M \Gammaii_{2j-1}\Gammaii_{2j}
+\end{equation}
+Układy fermionowe, w stanie nadprzewodzącym lub w kontakcie z nadprzewodnikiem, chronione są symetrią parzystości, a  więc całkowita parzystość układu powinna być zachowana.
+Rozważmy co się stanie z \MZM\ po adiabatycznej zamianie quasiczątek miejscami.
+Dla danej pewnej fazy $\eta_i\in\{-1,+1\}$, \MZM\  zamieniają się pozycjami:
+\begin{align}
+    \Gammai &\to \Gammai'= \eta_{j} \Gammaii_{j},\\
+    \Gammaj & \to \Gammaj' = \eta_{i} \Gammai.
+\end{align}
+Po takiej transformacji operator parzystości $\widetilde\parity$ powinien pozostać inwariantny
+\begin{equation}
+    \widetilde \parity \to \widetilde\parity' = 
+    \iu^M \Gammaii_1 \cdots \Gammaii_i' \cdots \Gammaii_j' \cdots \Gammaii_{2M}=
+    - \iu^M \Gammaii_1 \cdots \eta_i\Gammaii_i \cdots \eta_j\Gammaii_j \cdots \Gammaii_{2M} = \widetilde\parity\label{eq:parityCons}
+\end{equation}
+Aby równanie~\eqref{eq:parityCons} było spełnione, następujący warunek na fazy $\eta_i$ musi również być spełniony
+\begin{equation}
+    \eta_i\eta_j = -1.
+\end{equation}
+To równanie ma dwa rozwiązania:
+\begin{align}
+    \eta_i = \mp 1,\\
+    \eta_j = \pm 1.
+\end{align}
+Pod tym rozwiązaniem ukryta jest najważniejsza własność \MZM\ --- nieabelowa statystyka (\acrshort{NAS}):
+\begin{align}
+    \Gammai &\to  \pm \Gammaii_{j},\\
+    \Gammaj & \to \pm \Gammai.
+\end{align}
+
+Co się stanie ze stanem kwantowym $\state$ takiego układu po wymianie cząstek $\Gammai$, $\Gammaj$ (zakładając adiabatyczny proces wymiany)?
+W mechanice kwantowej stan początkowy i stan końcowy  związany jest z pewną transformacją unitarną $\propagator$
+\begin{equation}
+\state \to \propagator\state.
+\end{equation}
+Rozwiązanie tego problemu można znaleźć zakładając, że w  układzie zachowana jest parzystość $\widetilde\parity$.
+To implikuje fakt, że operator $\propagator$ komutuje z operatorem parzystości $\widetilde\parity$: 
+\begin{equation}
+    [\propagator,\widetilde \parity] = 0.
+\end{equation}
+Rozsądnym założeniem, jest również to, że operator $\propagator$ zależy tylko i wyłącznie od cząstek uczestniczących w wymianie $\propagator(\Gammai,\,\Gammaj)$.
+Założono, postać takiego operatora
+\begin{equation}
+    \propagator(\Gammai,\,\Gammaj) = \exp[-\iu \mathcal A_{ij} \omega ],
+\end{equation}
+gdzie $\mathcal A_{ij}$ to operator hermitowski, a $\omega\in\realNumbers$.
+Operator $\mathcal A_{ij}$ musi być funkcją operatorów $\Gammai,\,\Gammaj$.
+Naturalnym kandydatem na postać $\mathcal A_{ij}$ jest operator parzystości zbudowany z \MZM\ uczestniczących w wymianie
+\begin{equation}
+    \mathcal A_{ij} = \iu \, \Gammai\, \Gammaj.
+\end{equation}
+Można wykazać, że postać $\propagator$ jest następująca%
+ \footnote{\label{footnote:propagator}Wyprowadzenie można znaleźć w dodatku~\ref{chap:derivations}.}
+\begin{equation}
+    \propagator = \cos \omega + \Gammai\Gammaj\sin\omega.\label{eq:propagator1}
+\end{equation}
+
+\pagebreak
+
+\noindent
+Pozostało ustalić $\omega$. 
+Można to zrobić pracując w obrazie Heisenberga~\cite{cohen-tannoudji.1977}%
+%\footref{footnote:propagator}
+\footnote{Wyprowadzenie można znaleźć w dodatku~\ref{chap:derivations}.}
+\begin{equation}
+    \Gammai \to \Gammai'= \propagator^\dagger\Gammai\propagator = \Gammai \cos(2\omega) + \Gammaj \sin(2\omega) = \pm\Gammaj,\label{eq:propagator2}
+\end{equation}
+co prowadzi do układu równań:
+\begin{equation}
+    \begin{cases}
+    \cos(2\omega) &= 0,\\
+    \sin(2\omega) &= \pm1.
+    \end{cases}
+\end{equation}
+Ostatecznie są dwa rozwiązania dla $\omega\in[-\tfrac{\pi}2,\tfrac{\pi}2]$
+\begin{equation}
+    \omega = \pm \frac \pi4.
+\end{equation}
+Dwa rozwiązania $\omega$ nie są niczym nadzwyczajnym.
+Znak można interpretować jako wymianę zgodną ze wskazówkami zegara, oraz wymianę przeciwną do wskazówek zegara.
+Ostatecznie postać operatora $\propagator$ jest następująca
+\begin{equation}
+    \propagator(\Gammai,\,\Gammaj) = \exp[+\tfrac\pi4\Gammai\Gammaj] = 
+    \tfrac1{\sqrt2}\left(1+\Gammai\Gammaj \right).
+\end{equation}
+Wybrano rozwiązanie $\omega =+\tfrac\pi4$ i przyjęto, że to rozwiązanie odpowiada wymianie zgodnej ze wskazówkami zegara.
+Rozwiązanie $\propagator(\Gammaj,\,\Gammai)$ odpowiadające wymianie cząstek przeciwnie ze wskazówkami zegara odpowiada operacji odwrotnej do $\propagator(\Gammai,\,\Gammaj)$
+\begin{equation}
+    \propagator^{-1}(\Gammai,\,\Gammaj) = \propagator(\Gammaj,\,\Gammai) = \propagator^\dagger(\Gammai,\,\Gammaj) = \tfrac1{\sqrt2}(1-\Gammai\Gammaj).
+\end{equation}
+
+Dalej można zdefiniować nowy operator, $\braidOperator$,
+ operator wyplatania
+\begin{equation}
+    \braidOperator = \propagator(\Gammai,\,\Gammaii_{i+1}) = \tfrac1{\sqrt2}(1+\Gammai \Gammaii_{i+1})\label{eq:braidOperator}.
+\end{equation}
+Zbiór takich operatorów $\{\braidOperatori_1,\dots,\braidOperatori_{M-1},\braidOperatori_1^{-1},\dots,\braidOperatori_{M-1}^{-1} \}$ stanowi zbiór generatorów \linebreak warkoczowej  $M$-włóknowej grupy Artina $\braidGroup $~\cite{adams.2004}.
+W obrębie grupy warkoczowej $\braidGroup$ następujące równania są spełnione:
+\begin{align}
+    \forall_{|i-j|>1}\,\,\,\braidOperator\braidOperatori_j &= \braidOperatori_j\braidOperator,\label{eq:yangbaxter1}\\
+    \forall_i\,\,\,\braidOperator\braidOperatori_{i+1}\braidOperator & = \braidOperatori_{i+1}\braidOperator\braidOperatori_{i+1}.\label{eq:yangbaxter2}
+\end{align}
+Wyżej wymienione równania stanowią tzw. \textit{równania Yanga--Baxtera}~\cite{yu.ge.2015,kauffman.2018,beenakker.2019}.
+Dowód, że te równania są spełnione przez operator $\braidOperator$ zdefiniowany w \eqref{eq:braidOperator} został przeprowadzony w~dodatku~\ref{chap:derivations}.
+Przykład w jaki sposób można reprezentować grupę warkoczową $\braidGroup$, włókna oraz operacje wyplatania $\braidOperator$ zilustrowano na rysunku~\ref{fig:braidGroupExample}.
+\MZM\ mogą być interpretowane jako włókna w grupie $\braidGroup$.
+
+\begin{figure}[ht!]
+%\hspace{-3cm}
+\begin{tikzpicture}[scale=0.9]
+
+\begin{scope}[xshift=0cm]
+\draw (0.5,0.5) node{(a)};
+\input{04-Includes/Figures/tikz/braid1.tex}
+\end{scope}
+
+\begin{scope}[yshift=-2cm]
+\draw (0.5,0.) node{(b)};
+\input{04-Includes/Figures/tikz/braid2.tex}
+\end{scope}
+
+\begin{scope}[xshift=10cm,yshift=-0.cm]
+\draw (0.5,0.5) node{(c)};
+\input{04-Includes/Figures/tikz/braid3.tex}
+\end{scope}
+\end{tikzpicture}
+
+\caption[Ilustracja grupy warkoczowej]
+{
+Ilustracja grupy warkoczowej $\braidGroupi 4$, dla  $M=4$ włókien.
+Włókna zostały ponumerowane.
+Ilustracja równania:
+(a) $\braidOperatori_1\neq \braidOperatori_1^{-1}$ (nieabelowość);
+(b) $\braidOperatori_1 \braidOperatori_1^{-1}=\bbone$;
+(c) Yanga--Baxtera \eqref{eq:yangbaxter2}. 
+}
+\label{fig:braidGroupExample}
+\end{figure}
+
+
+
+
+
+
+
+\ornament
+
+\section{Bramki kwantowe}\label{sec:quantumGates}
+
+W celu realizacji qubitu z wykorzystaniem \MZM\ potrzebne są co najmniej cztery \MZM\ $\Gammai$.
+Spowodowane jest to symetrią parzystości w takich układach fermionowych, w których realizowane są \MZM.
+W sekcji~\ref{sec:nonabelianStatistics} pokazano, że degeneracja stanu podstawowego zależy od liczby $\Gammai$ w układzie jak $2^{M/2}$, gdzie $M$ to liczba niezależnych \MZM\ $\Gammai$ w układzie.
+Połowa tych zdegenerowanych stanów należy do sektora parzystego, a druga połowa do sektora nieparzystego przestrzeni Hilberta $\hilbertSpace$.
+Posiadając w~układzie tylko dwie niezależne \MZM\ nie jesteśmy w stanie skonstruować bazy dla qubitu bazującego na \MZM.
+Układ posiadający dwa niezależne $\Gammai$ posiada dwa stany podstawowe $\odd$ z sektora nieparzystego oraz $\even$ z sektora parzystego przestrzeni Hilberta $\hilbertSpace$.
+Z uwagi na symetrię parzystości, przejścia pomiędzy stanami $\even\to\odd$ czy $\odd\to\even$ są niedozwolone.
+Układ zawierający cztery \MZM: $\Gammaii_1$, $\Gammaii_2$, $\Gammaii_3$, $\Gammaii_4$ posiada cztery stany podstawowe: $\eeven=\even\,\kron\,\even$, $\eodd=\even\,\kron\,\odd$, $\oeven=\odd\,\kron\,\even$, $\oodd=\odd\,\kron\,\odd$.
+Przyjęto następującą numerację quasicząstek
+\begin{equation}
+\oodd = \aidit{1}\aidit{2}\eeven.\label{eq:MZMstateEnum}
+\end{equation}
+Układ chroniony jest symetrią parzystości. 
+Stany $\eeven$, $\oodd$ są parzyste, a stany $\oeven$, $\eodd$ są nieparzyste.
+Przejścia, gdzie zachowana jest parzystość stanu kwantowego, w takim przypadku $\oodd\rightleftarrows\eeven$ oraz $\oeven\rightleftarrows\eodd$, są dozwolone.
+Niedozwolone są natomiast przejścia pomiędzy stanami o różnej parzystości: $\oodd\rightleftarrows\eodd$,  $\oodd\rightleftarrows\oeven$, $\eeven\rightleftarrows\eodd$ oraz $\eeven\rightleftarrows\oeven$.
+Grupa warkoczowa $\braidGroupi 4$ posiada $6$ generatorów: $\braidOperatori_1,\,\braidOperatori_2,\,\braidOperatori_3,\,\braidOperatori_1^\dagger,\,\braidOperatori_2^\dagger,\,\braidOperatori_3^\dagger$.
+W dalszej części rozważań założono, że w układzie znajdowała się  parzysta liczba cząstek.
+Stany bazowe qubitu $\qstate0$, $\qstate1$ można zdefiniować w następujący sposób:\footnote{Analogiczną analizę można przeprowadzić dla pozostałych stanów $\eodd$, $\oeven$.}
+\begin{align}
+    \qstate{0} &= \eeven,\label{eq:state0}\\
+    \qstate1 &= \oodd.\label{eq:state1}
+\end{align}
+%\subsection{Bramka $Z$}
+Następnie przeanalizowano co się stanie ze stanami $\qstate0$, $\qstate1$ po dokonaniu wyplatania $\braidOperatori_1$
+\begin{equation}
+    \qstate0 \to \braidOperatori_1 \qstate{0} = \tfrac1{\sqrt2}(1+\Gammaii_1\Gammaii_2)\qstate{0} =
+    \tfrac1{\sqrt2}(1-\iu\widetilde\parity_1)\eeven =
+    \tfrac1{\sqrt2}(1-\iu)\qstate0 = \exp(-\iu \tfrac\pi4)\qstate0.
+\end{equation}
+Oczywiście wyplatanie dokonane w odwrotnej kolejności prowadzi do przeciwnej zmiany fazy
+\begin{equation}
+    \qstate0 \to \braidOperatori_1^\dagger\qstate0 = \exp(+\iu\tfrac\pi4)\qstate0,
+\end{equation}
+co stanowi wspomnianą wcześniej właśność \MZM: nieabelowość.
+Analogicznie stan $\qstate1$
+\begin{equation}
+    \qstate1 \to \braidOperatori_1\qstate1 = \exp(+\iu\tfrac\pi4)\qstate1.
+\end{equation}
+Podwójna wymiana $\braidOperatori_1^2$:
+\begin{align}
+    \qstate0 &\to \braidOperatori_1^2 \qstate0 = \exp(-\iu\tfrac\pi2)\qstate0 = -\iu \qstate0,\\
+    \qstate1 &\to \braidOperatori_1^2 \qstate1 = \exp(+\iu\tfrac\pi2)\qstate1 = +\iu\qstate1.
+\end{align}
+Z dokładnością do fazy globalnej, operację $\braidOperatori_1^2$ można interpretować jako bramkę $\zgate$, którą w~bazie qubitu można zapisać jako%
+\mymarginpar{\footnotesize
+\begin{tikzpicture}[scale=0.7]
+\input{04-Includes/Figures/tikz/braid4.tex}
+\end{tikzpicture}
+\captionof{figure}[Realizacja bramki $Z$.]{Realizacja bramki $\zgate$.}
+\label{fig:zgate}
+} 
+\begin{equation}
+    \zgate = \braidOperatori_1^2 = -\iu \paulii^z=-\iu
+    \left[\begin{array}{lr}
+    1     & 0 \\
+    0     & -1
+    \end{array}\right],
+\end{equation}
+gdzie $\qstate0=\left[ \begin{array}{c}
+     1\\0
+\end{array}\right]$, 
+$\qstate0=\left[ \begin{array}{c}
+     0\\1
+\end{array}\right]$.
+Ta dodatkowa faza $-\iu$ nie ma wpływu na wynik obliczeń kwantowych z wykorzystaniem takiej bramki $\zgate$.
+Realizacja bramki została schematycznie  przedstawiona na rysunku~\ref{fig:zgate}.
+%\subsection{Bramka $X$}
+Następnie przeanalizowano działanie operatora $\braidOperatori_2$ na stany bazowe qubitu\footnote{\label{footnote:Xgate}%
+Wyprowadzenie można znaleźć w dodatku~\ref{chap:derivations}.}
+\begin{equation}
+    \qstate0 \to \braidOperatori_2\qstate0 = \tfrac1{\sqrt2}(1+\Gammaii_2\Gammaii_3)\qstate0 = \tfrac1{\sqrt2}(\qstate0-\iu\qstate1).\label{eq:braidB2}
+\end{equation}
+Otrzymano superpozycję stanów bazowych.
+Analogicznie stan $\qstate1$\footref{footnote:Xgate}
+\begin{equation}
+    \qstate 1 \to \braidOperatori_2\qstate 1 = \tfrac1{\sqrt2}(\qstate1 -\iu \qstate0).\label{eq:braidB21}
+\end{equation}
+
+\pagebreak
+
+\noindent
+Natomiast po podwójnej takiej operacji:\footnote{\label{footnote:X2gate}%
+Wyprowadzenie można znaleźć w dodatku~\ref{chap:derivations}.}
+\mymarginpar{\footnotesize
+\begin{tikzpicture}[scale=0.7]
+\input{04-Includes/Figures/tikz/braid5.tex}
+\end{tikzpicture}
+\captionof{figure}[Realizacja bramki $X$.]{Realizacja bramki $\xgate$.}
+\label{fig:xgate}
+} 
+\begin{align}
+\qstate0 &\to  \braidOperatori_2^2\qstate 0 = -\iu \qstate 1,\label{eq:braidB220}\\
+\qstate1 &\to  \braidOperatori_2^2\qstate 1 = -\iu \qstate 0.\label{eq:braidB221}
+\end{align}
+ Co do nieistotnej fazy otrzymano bramkę $\xgate$ (co odpowiada klasycznej bramce \texttt{\normalsize not}) schematycznie przedstawioną na rysunku~\ref{fig:xgate}
+ \begin{equation}
+      \xgate = \braidOperatori_2^2 = -\iu \paulii^x=-\iu
+    \left[\begin{array}{lr}
+    0     & 1 \\
+    1     & 0
+    \end{array}\right].   
+ \end{equation}
+ %\subsection{Bramka $Y$}.
+  Można pokazać, że następujące operacje prowadzą do realizacji bramki $\ygate$\footref{footnote:X2gate}  (rysunek~\ref{fig:ygate})%
+\mymarginpar{\footnotesize
+\begin{tikzpicture}[scale=0.7]
+\input{04-Includes/Figures/tikz/braid6.tex}
+\end{tikzpicture}
+\captionof{figure}[Realizacja bramki $Y$.]{Realizacja bramki $\ygate$.}
+\label{fig:ygate}
+} 
+  \begin{equation}
+      \ygate = \braidOperatori_1\braidOperatori_2^2\braidOperatori_1^\dagger = -\iu\paulii^y =   -\iu\left[\begin{array}{cr}
+    0     & -\iu \\
+    \iu     & 0
+    \end{array}\right]. \label{eq:braidYgate}
+  \end{equation}
+ % \subsection{Bramka Hadamarda}
+W prosty sposób można zrealizować bramkę Hadamarda $\hadamard$\footref{footnote:X2gate} (rysunek~\ref{fig:hadamard})%
+\mymarginpar{\footnotesize
+\begin{tikzpicture}[scale=0.7]
+\input{04-Includes/Figures/tikz/braid7.tex}
+\end{tikzpicture}
+\captionof{figure}[Realizacja bramki $\textsf{\textbf{\textit{H}}}$]{Realizacja bramki $\hadamard$.}
+\label{fig:hadamard}
+} 
+\begin{equation}
+    \hadamard = \braidOperatori_1 \braidOperatori_2 \braidOperatori_1 = -\iu\,\tfrac1{\sqrt2}
+    \left[\begin{array}{lr}
+    1     & 1 \\
+    1     & -1
+    \end{array}\right]. \label{eq:braidHgate}
+\end{equation}
+W dodatku~\ref{chap:MZMCNOT} czytelnik może znaleźć analizę układu \MZM, który może posłużyć do konstrukcji układu dwuqubitowego, wraz z realizacją bramki $\CNOT$.
+
+\ornament
+
+\section{Uniwersalność obliczeń, a bramka fazowa}\label{sec:universalQuantumComputing}
+
+W przypadku komputerów klasycznych wystarczą dwie bramki  aby zagwarantować \textit{uniwersalność} obliczeń np. \texttt{OR}  i \texttt{NOT} lub \texttt{AND} i \texttt{NOT} lub jedna dwubitowa \texttt{NOR} lub \texttt{NAND}~\cite{nielsen.chuang.2011}.
+Z tych ostatnich dwóch, w prosty sposób można zrealizować pierwsze cztery wymienione bramki.
+Nieformalnie oznacza to, że wykorzystując wyżej wymienione klasyczne bramki można zrealizować dowolny klasyczny algorytm z dowolną dokładnością.
+Zestaw takich bramek często nazywa się \textit{uniwersalnymi bramkami logicznymi}.
+
+Bramka Hadamarda $\hadamard$, bramka fazowa%
+\footnote{%
+$
+\phaseGatei{\tfrac\pi4}=
+\begin{bmatrix}
+    1     & 0 \\
+    0     & \text \eee^{\iu  \frac \pi 4}
+\end{bmatrix}
+$}
+$\phaseGatei{\tfrac\pi4}$ oraz bramka $\CNOT$%
+\footnote{%
+$
+\CNOT=
+\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0
+\end{bmatrix}
+$}
+stanowią minimalny zestaw bramek, które gwarantują uniwersalność obliczeń kwantowych~\cite{nielsen.chuang.2011} --- \textit{uniwersalne}\linebreak \textit{bramki} \textit{kwantowe}.
+Niestety okazuje się, że zestaw bramek, który można wygenerować za pomocą generatorów grupy warkoczowej $\braidGroup$, nie gwarantuje uniwersalności obliczeń~\cite{sarma.freedman.2015}.
+Bramkę Hadamarda $\hadamard$ oraz bramkę $\CNOT$ można zrealizować z wykorzystaniem \MZM\ \linebreak z~zagwarantowaną ochroną topologiczną, co pokazano odpowiednio w sekcji~\ref{sec:quantumGates} oraz \linebreak w dodatku~\ref{chap:MZMCNOT}.
+Wyzwanie stanowi bramka fazowa $\phaseGatei{\frac\pi4}$.
+Tej ostatniej nie da się zrealizować wykorzystując \MZM\ z równoczesną zagwarantowaną ochroną topologiczną~\cite{sarma.freedman.2015}.
+Da się natomiast skonstruować taką bramkę zbliżając i oddalając parę \MZM\ na pewien czas $\timeNormal$.
+\MZM\ w układach zanikają wykładniczo od brzegów układu~\cite{kitaev.2001}.
+W przypadku gdy \MZM\ przekrywają się na skutek oddziaływania, stany podstawowe ulegają rozszczepieniu o pewną energię $\deltaE=\Energy^{ee}-\Energy^{oo}$, gdzie odpowiednio energie $\Energy^{ee}$ oraz $\Energy^{oo}$ to energie własne stanów bazowych qubitu $\qstate0=\eeven$ oraz
+ $\qstate 1=\oodd$  [równania \labelcref{eq:state0,eq:state1}].
+Zakładając, że hamiltonian układu nie zależy od czasu i obecne jest niezerowe rozszczepienie energii $\deltaE\neq0$, po czasie $\timeNormal$ stany nabiorą odpowiednio fazy:
+\begin{align}
+\eeven &\to \eee^{-\iu \Energy^{ee} \timeNormal}\eeven,\\
+\oodd &\to \eee^{-\iu \Energy^{oo} \timeNormal}\oodd.
+\end{align}
+Można to odpowiednio zaprezentować w postaci macierzy:
+\begin{equation}
+\phaseGate= 
+\left[\begin{array}{cc}
+\eee^{-\iu \Energy^{ee}\timeNormal} &  0\\
+0 & \eee^{-\iu \Energy^{oo}\timeNormal}
+\end{array}\right] = 
+\eee^{-\iu \Energy^{ee}\timeNormal}\left[\begin{array}{cc}
+1 &  0\\
+0 & \eee^{\iu \deltaE\, \timeNormal}
+\end{array}\right] =
+\eee^{\iu\chi}\left[\begin{array}{cc}
+1 &  0\\
+0 & \eee^{\iu \theta}
+\end{array}\right] 
+\end{equation}
+Z dokładnością do nieistotnej fazy globalnej $\chi=-\Energy^{ee}\timeNormal$ otrzymano bramkę fazową $\phaseGate$, gdzie $\theta = \deltaE\,\timeNormal$.
+Zakładając idealną kontrolę nad układem, można by zrealizować bramkę $\phaseGatei{\tfrac\pi4}$ wymaganą do zagwarantowania uniwersalności obliczeń.
+Oczywiście ciężko sobie wyobrazić taką perfekcyjną możliwość kontroli, w szczególności, że $\deltaE(\timeNormal)$ zależeć będzie od czasu dla takiego procesu zbliżania i oddalania \MZM.
+Taka operacja z pewnością będzie wymagała dodatkowej korekcji błędów, np. z wykorzystaniem tzw. \textit{destylacji magicznych stanów}~\cite{bravyi.kitaev.2005,sarma.freedman.2015}.
+Przedstawione powyżej rozwiązanie bazuje na fazie dynamicznej.
+Zdecydowaną wadą takiego rozwiązania jest fakt, że faza $\theta$ zależy nie tylko od zmian parametrów hamiltonianu układu, ale również od czasu ewolucji.
+W pracy~\cite{wieckowski.mierzejewski.2020}  zaproponowaliśmy inne podejście bazujące na fazie geometrycznej.
+Prezentowane rozwiązanie również wymaga dodatkowej korekcji błędów po wykonaniu operacji z nim związanych.
+Jednak takie rozwiązanie powinno generować mniejsze błędy niż standardowe podejście z wykorzystaniem fazy dynamicznej, dzięki wyeliminowaniu zależności od wspomnianej fazy.
+  
+\ornament

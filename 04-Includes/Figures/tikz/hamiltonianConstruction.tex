@@ -1,0 +1,79 @@
+\begin{tikzpicture}[yscale=-1]
+
+\draw [thick,green,-latex] (0.7,0.5) --++ (1,0);
+
+
+\draw [thick,red,-latex,shift={(-0.1,0.1)}] (0.7,0.7) -| (0.3,0.3);
+\draw [thick,red,latex-,shift={(0.1,-0.1)}] (0.7,0.7) |- (0.3,0.3);
+
+\path[left color=blue, right color=white,rotate=45] (0.,+-2\pgflinewidth) rectangle (1.414213562373095/2,+2\pgflinewidth);
+\begin{scope}[shift={(0.5,0.5)}]
+\path[left color=white, right color=blue,rotate=45] (0.,+-2\pgflinewidth) rectangle (1.414213562373095/2,+2\pgflinewidth);
+\end{scope}
+\node at (0.5,0.5) {\small$\hatH_0$};
+\draw[very thick,gray] (0,0) rectangle (1,1);
+
+\draw[very thick,gray,dashed] (1,0) rectangle (3,1);
+\draw[very thick,gray,dashed] (3,1) rectangle (6,3);
+\draw[very thick,gray,dashed] (0,1) rectangle (1,3);
+\draw[very thick,gray,dashed] (1,3) rectangle (3,6);
+
+\begin{scope}[shift={(1,1)},scale=2]
+\draw [thick,green,-latex] (0.7,0.5) --++ (1,0);
+\draw [thick,green,-latex] (0.3,0.5) --++ (-0.5,0);
+\draw [thick,red,-latex,shift={(-0.1,0.1)}] (0.7,0.7) -| (0.3,0.3);
+\draw [thick,red,latex-,shift={(0.1,-0.1)}] (0.7,0.7) |- (0.3,0.3);
+
+\path[left color=blue, right color=white,rotate=45] (0.,+-\pgflinewidth) rectangle (1.414213562373095/2,+\pgflinewidth);
+\begin{scope}[shift={(0.5,0.5)}]
+\path[left color=white, right color=blue,rotate=45] (0.,+-\pgflinewidth) rectangle (1.414213562373095/2,+\pgflinewidth);
+\end{scope}
+\node at (0.5,0.5) {$\hatH_2$};
+\draw[very thick,gray] (0,0) rectangle (1,1);
+\end{scope}
+
+\begin{scope}[shift={(3,3)},scale=3]
+\draw [thick,green,-latex] (0.7,0.5) --++ (0.66666,0)node[above left]{%
+\colorlet{tmpcolor}{black}\colorlet{black}{green}%
+$\color{green}\aid\ajd$
+\colorlet{black}{tmpcolor}
+};
+\draw [thick,green,-latex] (0.3,0.5) --++ (-0.66666,0)node[above right]{%
+\colorlet{tmpcolor}{black}\colorlet{black}{green}%
+$\ai\aj$%
+\colorlet{black}{tmpcolor}
+};
+\draw [thick,red,-latex,shift={(-0.1,0.1)}] (0.7,0.7)node[below left,yshift=3]{%
+\colorlet{tmpcolor}{black}\colorlet{black}{red}%
+$\ajd\ai$%
+\colorlet{black}{tmpcolor}%
+} -| (0.3,0.3);
+\draw [thick,red,latex-,shift={(0.1,-0.1)}] (0.7,0.7) |- (0.3,0.3)node[above right,yshift=-3]{%
+\colorlet{tmpcolor}{black}\colorlet{black}{red}%
+$\aid\aj$%
+\colorlet{black}{tmpcolor}%
+};
+
+\path[left color=blue, right color=white,rotate=45] (0.,+-0.6666666\pgflinewidth) rectangle (1.414213562373095/2,+0.6666666\pgflinewidth);
+\begin{scope}[shift={(0.5,0.5)}]
+\path[left color=white, right color=blue,rotate=45] (0.,+-0.6666666\pgflinewidth) rectangle (1.414213562373095/2,+0.6666666\pgflinewidth);
+\end{scope}
+\node at (0.5,0.5) {$\hatH_4$};
+\draw[very thick,gray] (0,0) rectangle (1,1);
+\draw[very thick,gray,dotted] (1,1)--++(0.15,0.15);
+
+\node at (.2,.12) {%
+\colorlet{tmpcolor}{black}\colorlet{black}{blue}%
+$\nz{i}$
+\colorlet{black}{tmpcolor}%
+};
+\node at (.8,.91) {%
+\colorlet{tmpcolor}{black}\colorlet{black}{blue}%
+$\nz{i}\nz{j}$%
+\colorlet{black}{tmpcolor}%
+};
+
+\end{scope}
+
+
+\end{tikzpicture}

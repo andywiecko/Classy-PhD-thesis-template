@@ -1,0 +1,241 @@
+\chapter{Dynamika kwantowa}\label{chap:dynamics}
+
+\section*{Opis rozdziału}
+
+W tym rozdziale opisane zostanie w jaki sposób badano dynamikę układów kwantowych w przedstawionej rozprawie doktorskiej.
+Przedstawione zostaną dwa schematy numeryczne do rozwiązywania równań różniczkowych: schemat Runge--Kutta czwartego rzędu oraz schemat wielomianów Czebyszewa.
+Bedzie tutaj omówione w jaki sposób można numerycznie wyznaczać fazy geometryczne i dynamiczne dla ewolucji cyklicznych.
+
+\section{Pełna ewolucja czasowa}
+
+Odpowiednikiem równania Newtona mechaniki kwantowej jest \glslink{TDSE}{zależne od czasu równanie Schr\"odingera (ang. time dependent Schr\"odinger equation, TDSE)}, które można zapisać w~następującej postaci
+\begin{equation}
+    \iu \HBAR \tfrac{\partial}{\partial \timeNormal} \qstate{\psi(\timeNormal)} = \hatH(\timeNormal)\qstate{\psi(\timeNormal)},\label{eq:timeDependentSchrodingerEquation}
+\end{equation}
+gdzie $\HBAR$ to stała Plancka podzielona przez $2\pi$.
+Równanie to opisuje ewolucję stanu kwantowego $\qstate{\psi(\timeNormal)}$ --- jest to równanie ruchu.
+W dalszej części pracy we wszystkich równaniach przyjęto $\HBAR=1$.
+Rozwiązanie tego równania jest następujące
+\begin{equation}
+    \qstate{\psi(\timeNormal)} = \propagator(\timeNormal,0)\qstate{\psi(0)},
+\end{equation}
+gdzie $\propagator(\timeNormal,0)$ to operator ewolucji, a $\qstate{\psi(0)}$ to warunek początkowy --- stan kwantowy dla czasu $\timeNormal=0$.
+Operator ewolucji $\propagator(\timeNormal,\timeNormal')$ w następujący sposób związany jest z hamiltonianem układu $\hatH$
+\begin{equation}
+    \propagator(\timeNormal,\timeNormal') = \chrono \exp\left(-\iu \int\limits_{\timeNormal'}^{\timeNormal}\text d\timeNormal'' \,\,\hatH(\timeNormal'')\right),\label{eq:propagatorFull}
+\end{equation}
+gdzie $\hat{\altmathcal T}$ to operator chronologiczny, a
+$\timeNormal>\timeNormal'$.
+W rozwiązaniu pojawił się operator $\hat{\altmathcal T}$, ponieważ w ogólności $[\hatH(\timeNormal),\hatH(\timeNormal')]\neq 0$ dla $\timeNormal\neq\timeNormal'$.
+Ważną własnością operatora ewolucji jest przechodniość
+\begin{equation}
+    \propagator(\timeNormal'',\timeNormal) = \propagator(\timeNormal'',\timeNormal')\propagator(\timeNormal',\timeNormal)
+\end{equation}
+Korzystając z tej własności  operator $\propagator(\timeNormal,\timeNormal')$ możemy zdekomponować na iloczyn skończonej liczby $M$ operatorów ewolucji
+\begin{equation}
+\propagator(\timeNormal,\timeNormal') = \prod_{m=0}^{M-1}\propagator(\timeNormal-\delta\timeNormal_m,\timeNormal-\delta\timeNormal_{m-1}),    \label{eq:propagatorFinite}
+\end{equation}
+gdzie $\delta\timeNormal_m=m\delta\timeNormal$, a $M\delta\timeNormal=\timeNormal-\timeNormal'$.
+Na bardzo krótkim przedziale czasu $[\timeNormal,\timeNormal+\delta\timeNormal]$ operator ewolucji
+$\propagator(\timeNormal+\delta\timeNormal,\timeNormal)$ można przybliżyć
+\begin{equation}
+\propagator(\timeNormal+\delta\timeNormal,\timeNormal) \approx \exp
+\left[ 
+    -\iu \hatH(\timeNormal+\delta\timeNormal/2)\delta\timeNormal
+\right].\label{eq:propagatorApprox}
+\end{equation}
+Skorzystano tutaj z \href{https://en.wikipedia.org/wiki/Midpoint_method}{metody punktu środkowego} do obliczenia całki z równania \eqref{eq:propagatorFull} i przyjęto wartość hamiltonianu w połowie przedziału czasu $[\timeNormal,\timeNormal+\delta\timeNormal]$, tzn. $\timeNormal+\delta\timeNormal/2$.
+Przedstawiona metoda przybliżenia $\propagator$ należy do jednej z prostszych metod.
+Metodę punktu środkowego można by zastąpić bardziej złożonym schematem przybliżonego całkowania numerycznego np. z wykorzystaniem metody trapezów.
+Dla badanych hamiltonianów w rozprawie doktorskiej, wyżej przedstawione przybliżenie jest wystarczające do otrzymania wyników ze satysfakcjonującym błędem numerycznym.
+
+
+W celu generowania przybliżenia $\propagator(\timeNormal,\timeNormal')$ [równanie~\eqref{eq:propagatorFinite}], konieczne jest przechowywanie w~pamięci co najmniej dwóch macierzy: $\propagator(\timeNormal+\delta\timeNormal,\timeNormal)$, $\propagator(\timeNormal+2\delta\timeNormal,\timeNormal+\delta\timeNormal)$.\footnote{%
+Oczywiście można to zrealizować przy pomocy jednej macierzy, a jedynie pomnożenie kolejnej macierzy z iloczynu \textit{generować w locie}.
+Takie podejście jednak nie jest efektywne.}
+Należy tutaj podkreślić, że do rozwiązania równania~\eqref{eq:timeDependentSchrodingerEquation} nie jest konieczne generowanie samej postaci operatora $\propagator(\timeNormal,\timeNormal')$. 
+Stan kwantowy można propagować wg następującego iteracyjnego schematu
+\begin{equation}
+    \qstate{\psi(\timeNormal+\delta\timeNormal)} = 
+    \propagator(\timeNormal+\delta\timeNormal,\timeNormal) \qstate{\psi(\timeNormal)}.\label{eq:propagateIterative}
+\end{equation}
+W takim podejściu, zamiast w pamięci przechowywać co najmniej dwie macierze reprezentujące $\propagator(\timeNormal+\delta\timeNormal,\timeNormal)$ i wektor reprezentujący stan $\qstate{\psi(\timeNormal)}$, wystarczy przechowywać jedną macierz i wektor.
+
+Istnieje technika, która znajduje tylko jeden operator ewolucji
+$\propagator(\timeNormal,0) = \exp[-\iu \Omega t]$.
+Ta technika nazywa się rozwinięciem w szereg Magnusa~\cite{magnus.1954}.
+Metoda bazuje na wyznaczaniu szeregu komutatorów hamiltonianu dla różnych czasów. 
+Od strony fizyki układów silnie skorelowanych, ogromną wadą tej metody jest fakt, że z każdym kolejnym komutatorem z~takiego rozwinięcia, rośnie ilość niezerowych elementów macierzy, którą reprezentuje przybliżenie operatora $\Omega$. 
+
+Przybliżony propagator \eqref{eq:propagatorApprox} w większości przypadków należy dalej przybliżać, ponieważ żeby otrzymać jego postać, trzeba wykonać operację podniesienia do potęgi macierzy.
+Na szczęście zgodnie z równaniem~\eqref{eq:propagateIterative} nie trzeba generować postaci propagatora \textit{explicite}.
+Wystarczy technika która imituje działanie takiego operatora.
+Zestawienie wybranych metod, wg których można tego dokonać zawarte jest w referencji~\cite{moler.vanloan.2003}. 
+
+\ornament
+
+\section{Schematy numeryczne}
+
+Bardzo prostą do implementacji metodą do rozwiązywania zwyczajnych równań różniczkowych (\acrshort{ODE}) jest schemat Runge--Kutta~\cite{runge.1895,kutta.1901}.
+Metoda jest rozszerzeniem algorytmu Eulera.
+Iteracyjny schemat [równanie~\eqref{eq:propagateIterative}] dla algorytmu Runge--Kutta czwartego rzędu przyjmuje następującą postać~\cite{suli.mayers.2003}
+\begin{equation}
+\qstate{\psi(\timeNormal+\delta\timeNormal)} =
+\qstate{\psi(\timeNormal)} + \tfrac16(\qstate{k_1}+2\qstate{k_2}+2\qstate{k_3}+\qstate{k_4}), \label{eq:RK4}
+\end{equation}
+gdzie wektory \(
+\qstate{k_1},\,\qstate{k_2},\,\qstate{k_3},\,\qstate{k_4}
+\) są zdefiniowane przez:
+\begin{align}
+\qstate{k_1} &=-\iu\delta \timeNormal \hatH(\timeNormal) \qstate{\psi(\timeNormal)} ,\\
+%
+\qstate{k_2} &=-\iu\delta \timeNormal \hatH(\timeNormal+\delta \timeNormal/2) (\qstate{\psi(\timeNormal)} +\tfrac12\qstate{k_1}),\\
+%
+\qstate{k_3} &=-\iu\delta \timeNormal \hatH(\timeNormal+\delta \timeNormal/2) (\qstate{\psi(\timeNormal)} +\tfrac12\qstate{k_2}),\\
+%
+\qstate{k_4} &=-\iu\delta \timeNormal \hatH(\timeNormal+\delta\timeNormal) (\qstate{\psi(\timeNormal)} +\qstate{k_3}).
+\end{align}
+Dzięki prostocie implementacji tej metody, taki schemat może stanowić dobre narzędzie do weryfikacji implementacji bardziej złożonych schematów ewolucji kwantowej.
+
+Do otrzymania wyników związanych z ewolucją czasową w tej pracy doktorskiej wykorzystano algorytm bazujący na przybliżeniu za pomocą rozwinięcia w szereg Czebyszewa~\cite{vega.1993,weisse.wellein.2006,fehske.schleede.2009,alvermann.fehske.2012}.
+Wielomiany Czebyszewa są bardzo potężnym narzędziem.
+Wielomiany te mogą posłużyć do rozwiązywania \acrshort{ODE}.
+Operator ewolucji [równanie~\eqref{eq:propagatorApprox}] można rozwinąć w szereg wielomianów Czebyszewa.
+Wielomiany Czebyszewa są zdefiniowane na skończonym przedziale $[-1,1]$ i stanowią ortogonalny zbiór wielomianów.
+W celu rozwinięcia funkcji operatora w szereg Czebyszewa, najpierw należy przeskalować operator w taki sposób, aby jego całe widmo spektralne znajdowało się w przedziale $[-1,1]$.
+Najprostszym rozwiązaniem jest transformacja liniowa. 
+W równaniu przedstawiono, na przykładzie hamiltonianu, w jaki sposób należy dokonać tej transformacji
+\begin{equation}
+    \hatH =A \hatH_{\text{scaled}} + B,
+\end{equation}
+gdzie $A,B\in\realNumbers$ które transformują widmo energetyczne do przedziału $[-1,1]$.
+Rozwinięcie operatora ewolucji~\eqref{eq:propagatorApprox} w bazie wielomianów Czebyszewa jest następujące
+\begin{equation}
+    \eee^
+{    -\iu \hatH(\timeNormal+\tfrac{\delta\timeNormal}2)\delta\timeNormal} = \eee^{-\iu B \timeNormal}\sum_{k=0}^{\infty}c_k(A\delta\timeNormal)\Tk[\hatH_{\text{scaled}}(\timeNormal+\tfrac{\delta\timeNormal}2)],\label{eq:chebyshevSeries}
+\end{equation}
+gdzie $c_k(t)$  to współczynniki rozwinięcia szeregu Czebyszewa, a  $\Tk(x)$ to wielomiany Czebyszewa zdefiniowane rekurencyjnie:
+\begin{align}
+    \Tii{0}(x) &= 1,\label{eq:chebDef1}\\
+    \Tii{1}(x) &= x,\label{eq:chebDef2}\\
+    \Tii{k+1}(x) & = 2x \Tii{k}(x)-\Tii{k-1}(x).\label{eq:chebDef3}
+\end{align}
+Funkcje $\Tk(x)$ na przedziale $[-1,1]$ stanowią zbiór zupełny ortogonalnych wielomianów wraz z iloczynem skalarnym
+\begin{equation}
+    \langle \Tk,\Tn \rangle = \int\limits_{-1}^1\text dx\,\,\frac{\Tk(x)\Tn(x)}{\pi\sqrt{1-x^2}}= \begin{cases}
+    0,& k\neq n,\\
+    1,& k=m=0,\\
+    \tfrac12,&k=m\neq0.
+    \end{cases}
+\end{equation}
+Można pokazać analitycznie, że współczynniki $c_k(\timeNormal)$ rozwinięcia dla funkcji $f(x) = \eee^{-\iu x\timeNormal}$ mają następującą postać
+\begin{equation}
+    c_k(\timeNormal) =\frac{\langle f(x),\Tk(x)\rangle}{\langle \Tk(x),\Tk(x)\rangle} = 
+    (-\iu)^k \,\Jk(\timeNormal),\label{eq:chebCoef}
+\end{equation}
+gdzie $\Jk(t)$ to \href{https://pl.wikipedia.org/wiki/Funkcje_Bessela#Funkcje_Bessela_pierwszego_rodzaju}{funkcja Bessela pierwszego rodzaju} rzędu $k$.
+To rozwinięcie można bezpośrednio wykorzystać do przybliżania operatora~\eqref{eq:chebyshevSeries}.
+
+Wykorzystując $M$
+wyrazów z rozwinięcia \eqref{eq:chebyshevSeries}, definicji rekurencyjnej wielomianów Czebyszewa  \labelcref{eq:chebDef1,eq:chebDef2,eq:chebDef3} oraz wyznaczonych współczynników \eqref{eq:chebCoef}, bez generowania jawnej postaci operatora ewolucji można w iteracyjny sposób propagować stan kwantowy
+\begin{equation}
+\qstate{\psi(\timeNormal+\delta\timeNormal)}=    \eee^{-\iu B \timeNormal}\sum_{k=0}^{M}c_k(A\delta\timeNormal)\Tk[\hatH_{\text{scaled}}(\timeNormal+\tfrac{\delta\timeNormal}2)]\qstate{\psi(\timeNormal)}. 
+\end{equation}
+To równanie możeny analogicznie przedstawić, tak jak w równaniu RK4 \eqref{eq:RK4}
+\begin{equation}
+\qstate{\psi(\timeNormal+\delta\timeNormal)}=    \eee^{-\iu B \timeNormal}
+\left(
+c_0(A\delta\timeNormal)\qstate{\psi(\timeNormal)}
++
+\sum_{k=1}^{M}
+c_k(A\delta\timeNormal)
+\qstate{\nu_k}\right), 
+\end{equation}
+gdzie $\qstate{\nu_k}$ można generować iteracyjne analogicznie jak wielomiany Czebyszewa:
+\begin{align}
+    \qstate{\nu_0} &= \qstate{\psi(\timeNormal)},\\
+    \qstate{\nu_1} &= \hatH_{\text{scaled}}(\timeNormal+\tfrac{\delta\timeNormal}{2}) \qstate{\nu_0},\\
+    \qstate{\nu_k} &= 2\hatH_{\text{scaled}}(\timeNormal+\tfrac{\delta\timeNormal}{2})\qstate{\nu_{k-1}}-\qstate{\nu_{k-2}}.
+\end{align}
+W standardowych problemach, współczynniki $c_k(t)$ bardzo szybko zbiegają do zera.
+Zazwyczaj wystarczy wziąć $M=5 \div 15$, aby osiągnąć \textit{satysfakcjonujące} przybliżenie rozwiązania równania Schr\"odingera (\acrshort{TDSE}).
+
+
+\ornament
+
+\section{Czynniki fazowe}\label{sec:phaseFactors}
+
+W celu weryfikacji statystyki nieabelowej (\acrshort{NAS}) dla układów zawierających \MZM, warto najpierw zdefiniować kilka faz geometrycznych, związanych z ewolucją kwantową.
+Faza geometryczna to dodatkowa faza do fazy dynamicznej, jaką nabiera układ podczas \textit{cyklicznej} ewolucji.
+W przypadku \textit{ogólnej cyklicznej} ewolucji kwantowej, fazą geometryczną jest faza Aharonova--Anandana $\PhiAA$~\cite{aharonov.anandan.1987}.
+W przypadku \textit{cyklicznej adiabatycznej} ewolucji kwantowej fazą geometryczną jest faza Berry'ego $\PhiBerry$~\cite{berry.1984}.
+Warunkiem koniecznym adiabatyczności ewolucji, jest niezanikająca szczelina energetyczna $\DeltaE$ między stanem podstawowym, a pierwszym stanem wzbudzonym.
+Zgodnie z twierdzeniem adiabatycznym, jeśli układ na początku ewolucji ($\timeNormal=0$) znajduje się w stanie podstawowym, to zakładając że ewolucja będzie przebiegać \textit{dostatecznie powoli}, pozostanie on w stanie podstawowym w całym przebiegu ewolucji.
+
+Pod pojęciem ewolucji cyklicznej\footnote{Zarówno ogólnej jak i~adiabatycznej ewolucji.} rozumie się taką ewolucję, dla której stan początkowy $\rho(0)$ jest równy stanowi końcowemu $\rho(\timeTotal)$ w sensie macierzy gęstości
+\begin{equation}
+\rho(0) = \qstate{\psi(0)}\qstatet{\psi(0)}=\qstate{\psi(\timeTotal)}\qstatet{\psi(\timeTotal)} = \rho(\timeTotal).
+\end{equation}
+W celu weryfikacji takiej własności ewolucji cyklicznej, bada się tzw. straty ,,wiarygodności'' (ang. \textit{fidelity loss})~\cite{nielsen.chuang.2011}
+\begin{equation}
+    \fidelity = 1 - |\qstatett{\psi(\timeTotal)}\qstate{\psi{(0)}}|^2.
+\end{equation}
+Dla ewolucji cyklicznej warunkiem koniecznym jest $\fidelity=0$.
+Testy takiej wielkości $\fidelity$ stosuje się również podczas badania wyplatania \MZM\ ~\cite{karzig.rahmani.2015,amorim.ebihara.2015,sekania.plugge.2017}.
+Dla cyklicznej ewolucji stan końcowy i stan początkowy różnią się tylko i wyłącznie czynnikiem fazowym
+\begin{equation}
+    \qstate{\psi(\timeTotal)} = \eee^{\iu\phi} \qstate{\psi(0)} = \eee^{\iu\PhiGeo}\eee^{\iu\PhiDyn}\qstate{\psi(0)}.
+\end{equation}
+Faza tego czynnika fazowego składa się z fazy dynamicznej $\PhiDyn$
+oraz fazy geometrycznej $\PhiGeo$~\cite{anandan.christian.97}.
+Część dynamiczną można wyznaczyć w następujący sposób
+\cite{griffiths.2005}
+\begin{equation}
+    \PhiDyn = \int\limits_0^{\timeTotal}\text dt\,\,\qstatet{\psi(\timeNormal)} \hatH(\timeNormal) \qstate{\psi(\timeNormal)},\label{eq:dynamicPhase}
+\end{equation}
+a część geometryczną w taki sposób~\cite{mukunda.simon.93}
+\begin{equation}
+    \PhiGeo = \arg\qstatett{\psi(0)}\qstate{\psi(\timeTotal)} - \Im \int\limits_0^{\timeTotal}\text dt\,\,\qstatet{\psi(\timeNormal)}\tfrac{\text d}{\text dt}\qstate{{\psi}(\timeNormal)}.\label{eq:geometricPhaseFull}
+\end{equation}
+W przypadku ogólnej cyklicznej ewolucji, faza geometryczna $\PhiGeo$ [równanie~\eqref{eq:geometricPhaseFull}] jest równoważna fazie Ahranova--Anandana $\PhiAA$.
+Natomiast w przypadku adiabatycznej, cyklicznej ewolucji, faza geometryczną $\PhiGeo$ [równanie~\eqref{eq:geometricPhaseFull}] odpowiada fazie Berry'ego $\PhiBerry$.
+
+Numerycznie fazę dynamiczną $\PhiDyn$ [równanie~\eqref{eq:dynamicPhase}] można policzyć w bardzo prosty sposób, np. korzystając z metody trapezów.
+Dodatkowa trudność pojawia się przy wyznaczeniu $\PhiGeo$. Równanie~\eqref{eq:geometricPhaseFull} należy wcześniej zdyskertyzować stosując następujący schemat~\cite{mukunda.simon.93}
+\begin{equation}
+    \PhiGeo = \arg\qstatett{\psi(0)}\qstate{\psi(\timeTotal)} - \arg \prod_{m=0}^{M-1} \qstatett{\psi(\delta\timeNormal_{m})}\qstate{\psi(\delta\timeNormal_{m+1})}\label{eq:geometicPhaseDiscrete}
+\end{equation}
+gdzie $\delta\timeNormal_m = m\delta\timeNormal$ oraz całkowity czas ewolucji $\timeTotal=\delta\timeNormal_M$.
+
+Dla dowolnego czasu $\timeNormal\in[0,\timeTotal]$
+można zdefiniować fazę wymiany $\PhiEx(\timeNormal)$~\cite{sekania.plugge.2017,wieckowski.mierzejewski.2020}.
+Faza wymiany, kiedy zmiany parametrów hamiltonianu tworzą zamkniętą pętlę, dla ewolucji adiabatycznej odpowiada fazie Berry'ego  $\PhiEx(\timeTotal) = \PhiBerry$.
+Fazę wymiany $\PhiEx$ możemy wyznaczać wg następującego dyskretnego przybliżenia
+\begin{equation}
+\PhiEx(\timeNormal) = \arg\qstatett{\psi(0)}\qstate{\psi(\timeNormal)} - \arg \prod_{m} \qstatett{\psi(\delta\timeNormal_{m})}\qstate{\psi(\delta\timeNormal_{m+1})}\label{eq:exchangePhaseDef}
+\end{equation}
+Fazę wyznacza się niemalże w identyczny sposób jak równanie~\eqref{eq:geometicPhaseDiscrete}, z tą różnicą, że stany $\qstate{\psi(0)}$, $\qstate{\psi(\timeNormal)}$ niekoniecznie tworzą ewolucję cykliczną.
+Faza wymiany nie jest niezmiennicza względem cechowania i może zależeć od szczególnych torów w przestrzeni parametrów hamiltonianu układu.
+Taka faza może stanowić cenną wskazówkę podczas analizy danego procesu, lecz nie przypisujemy jej znaczenia fizycznego.
+
+W przypadku układu z symetrią parzystości zawierającego \MZM, wygodnie jest zdefiniować różnice faz z poszczególnych podprzestrzeni parzystości.
+Zakładając, że układ ma dwa stany podstawowe $\qstate{e}$ oraz $\qstate o$, odpowiednio z podprzestrzeni z parzystą i nieparzystą liczbą cząstek, to po ewolucji cyklicznej te stany będą się różnić jedynie o czynniki fazowe:
+\begin{align}
+    \qstate e &\to \eee^{\iu\PhiDyni{e}}\eee^{\iu\PhiGeoi{e}}\qstate e\\
+    \qstate o &\to \eee^{\iu\PhiDyni{o}}\eee^{\iu\PhiGeoi{o}}\qstate o.
+\end{align}
+Następnie zdefiniowano różnicę faz dynamicznych i geometrycznych\footnote{Analogicznie $\DeltaPhi$ można zdefiniować dla pozostałych faz.} dla odpowiednich faz z sektora parzystego i nieparzystego:
+\begin{align}
+    \DeltaPhiDyn = \PhiDyni e-\PhiDyni o,\\
+    \DeltaPhiGeo = \PhiGeoi e-\PhiGeoi o.
+\end{align}
+W przypadku perfekcyjnej degeneracji stanów podstawowych $\qstate e$, $\qstate o$ na całej ścieżce ewolucji, faza $\DeltaPhiDyn=0$.
+W przypadku ewolucji zamieniającej \MZM\ miejscami, wspomniana faza $\DeltaPhiGeo=\DeltaPhiBerry=\pm\frac{\pi}2$~\cite{alicea.oreg.2011}.
+
+
+\ornament
+
+
+ 
+
+

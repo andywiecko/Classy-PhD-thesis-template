@@ -1,0 +1,101 @@
+\chapter*{Podsumowanie}
+\addcontentsline{toc}{part}{Podsumowanie}
+
+
+
+
+
+\section*{Podsumowanie oraz wnioski}
+
+W tej pracy przedstawiono wyniki dotyczące wpływu oddziaływań wielociałowych na własności zerowych modów Majorany w rozszerzonym modelu Kitaeva~\cite{kitaev.2001}.
+Poza destruktywnym wpływem oddziaływań na czasy życia zerowych modów Majorany, oddziaływania mogą zmieniać zakres obszaru topologicznego ze względu na inne parametry modelu, np. ze względu na potencjał chemiczny.
+Przed przedstawieniem oryginalnych wyników, w części~\hyperref[part:I]{\Romanbar{I}} oraz~\hyperref[part:II]{\Romanbar{II}} usystematyzowano potrzebną wiedzę teoretyczną wymaganą do zrozumienia omawianych wyników w części~\hyperref[part:III]{\Romanbar{III}}.
+Poniżej podsumowano najważniejsze wyniki oraz wnioski z rozdziałów z części~\hyperref[part:IV]{\Romanbar{IV}}.
+
+\subsection*{Rozdział~\ref{chap:identification}}
+
+W rozdziale~\ref{chap:identification} przedstawiono działanie algorytmu (opisanego w Rozdziale~\ref{chap:LIOMs}) do znajdowania silnych (lub \textit{prawie} silnych), lokalnych, zerowych modów Majorany, na przykładzie modelu Kitaeva z oddziaływaniami wielociałowymi.
+Stosowany algorytm jest ogólny i umożliwia badanie dowolnych hamiltonianów, w tym z dowolnymi oddziaływaniami wielociałowymi.
+Zaprezentowany algorytm dobrze odtwarza standardowe wyniki znane w literaturze. 
+Poza identyfikacją obecności \MZM, stosowany algorytm umożliwia badanie ich struktury przestrzennej.
+Wprowadzone oddziaływania wielociałowe mogą zwiększać lokalizację \MZM\ na brzegach układu, co skutkuje zmniejszeniem ich wzajemnego przekrywania, co w~konsekwencji prowadzi do zwiększenia ich czasu życia.
+
+
+\subsection*{Rozdział~\ref{chap:longrange}}
+
+Podsumowując rozdział~\ref{chap:longrange}, dalekozasięgowe oddziaływania bardzo silnie wpływają na czasy życia \MZM. 
+Co więcej, im dalszy zasięg tych oddziaływań, tym  występuje większy destrukcyjny efekt z nimi związany.
+Takie oddziaływanie może mieć kluczowe znacznie z~punktu widzenia przyszłych materiałów, które będą wykorzystane do realizacji qubitów na bazie \MZM.
+W materiałach takie oddziaływanie zanika wykładniczo wraz ze wzrostem odległości. 
+W~celu zagwarantowania efektywnych obliczeń kwantowych  bazujących na \MZM, z gwarancją ochrony topologicznej, należy ograniczać dalekozasięgowe oddziaływania. 
+
+\subsection*{Rozdział~\ref{chap:phaseGate}}
+
+
+
+W rozdziale~\ref{chap:phaseGate} przedstawiono konstrukcję bramki fazowej, która jest ogólna i aplikowalna dla każdego modelu opisanego hamiltonianem z symetrią cząstka--dziura.
+Kluczowym zjawiskiem, jakie jest wykorzystywane w tej bramce fazowej, jest przekrywanie się \MZM.
+W celu realizacji bramki fazowej, protokół wyplatania \MZM\ należy zaaplikować na obu trójzłączach $\trijunction{12}$, $\trijunction{34}$.
+Wykonanie protokołu na poszczególnych trójzłączach nie musi być zsynchronizowane w czasie, o ile czas trwania ewolucji na każdym złączu jest taki sam.
+Na jednym ze złączy lokalny potencjał, umożliwiający transport \MZM, należy wybrać na przeciwny wzgledem lokalnego potencjału na drugim złączu, co w fizycznym eksperymencie może odpowiadać wybraniu przeciwnych napięć przyłożonych do złączy.
+Na zrealizowanie takiego protokołu w prawdziwym eksperymencie czeka jeszcze wiele wyzwań i problemów.
+Trójzłącza mogą nie być identyczne, bardziej rzeczywiste hamiltoniany mogą zawierać wyrazy łamiące symetrię cząstka--dziura, potencjały $\mui(\timeNormal)$ mogą mieć różne amplitudy na złączach.
+Szacunkowy błąd zaprojektowanej bramki fazowej bazującej na fazie geometrycznej powinien być jednak mniejszy niż błąd bramki bazującej na fazie dynamicznej.
+Przesunięcie fazowe bramki bazującej na fazie geometrycznej zależy tylko i wyłącznie od zmian parametrów układu, w przeciwieństwie do bramki bazującej na fazie dynamicznej, gdzie w tej drugiej przesunięcie fazowe zależy również od czasu trwania ewolucji.
+Oczywiście, dla opisanego w pracy protokołu, bazującego na fazie geometrycznej, powinny być przeprowadzone dodatkowe korekty błędów~\cite{bravyi.kitaev.2005}.
+Pokazano, że faza takiej bramki fazowej, bazującej na fazie geometrycznej, zależy od wszystkich parametrów modelu, a w szczególności od oddziaływań wielociałowych, co podkreśla jaką istotną rolę mają tego typu oddziaływania w niskowymiarowych układach kwantowych.
+
+
+\ornament
+
+
+\section*{Zrealizowane cele}
+
+%%%%%Podsumowując, udało się zrealizować wszystkie cele postawione na początku rozprawy doktorskiej:
+%%%%%\renewcommand{\labelitemii}{$\circ$}
+%%%%%\begin{itemize}
+%    \item usystematyzowano wiedzę dotyczącą \MZM:
+%    \begin{itemize}
+%        \item w części~\hyperref[part:I]{\Romanbar{I}} dokonując przeglądu literatury;
+%        \item w części~\hyperref[part:II]{\Romanbar{II}} opisując podstawowy aparat matematyczny, model Kitaeva oraz wykorzystanie \MZM\ do realizacji podstawowych bramek kwantowych;
+%    \end{itemize}
+%%%%%    \item opracowano nową metodę umożliwiającą identyfikację silnych \MZM, w dowolnych układach oddziałujących fermionów
+%%%%%    \begin{itemize}
+%%%%%        \item algorytm omówiono w rozdziale~\ref{chap:LIOMs};
+%%%%%        \item w rozdziałach~\ref{chap:identification} oraz \ref{chap:longrange} algorytm zaaplikowano do rozwiązania postawionego problemu;
+%%%%%    \end{itemize}
+%%%%%    \item zbadano wpływ oddziaływań wielociałowych na własności \MZM\ otrzymując oryginalne wyniki z tym związane opisane w części~\hyperref[part:III]{\Romanbar{III}};
+%%%%%    \item opracowano nową implementację bramki fazowej dla qubitu bazującego na \MZM\ z~wykorzystaniem fazy geometrycznej co opisano w rozdziale~\ref{chap:phaseGate}.
+%%%%%\end{itemize}
+
+Podsumowując, udało się zrealizować wszystkie cele postawione na początku rozprawy doktorskiej.
+Opracowano nową metodę umożliwiającą identyfikację silnych \MZM, w dowolnych układach oddziałujących fermionów.
+Algorytm został szczegółowo omówiony w~rozdziale~\ref{chap:LIOMs}.
+W rozdziałach~\ref{chap:identification} oraz \ref{chap:longrange} algorytm został zaaplikowany do rozwiązania postawionych problemów fizycznych.
+Zbadany został wpływ oddziaływań wielociałowych na własności \MZM\ otrzymując oryginalne wyniki, które zostały opisane w części~\hyperref[part:III]{\Romanbar{III}}.
+Opracowano również nową implementację bramki fazowej dla qubitu bazującego na \MZM\ z~wykorzystaniem fazy geometrycznej co opisano w rozdziale~\ref{chap:phaseGate}.
+
+\ornament
+
+\section*{Wyzwania}
+
+Należy tutaj skomentować wyzwania oraz potencjalne perspektywy dotyczące wyników przedstawionych w niniejszej rozprawie doktorskiej.
+Wszelkie badania zbliżają środowisko naukowe do realizacji pierwszego topologicznego komputera kwantowego. 
+W~tej dziedzinie postęp naukowy  w~ostatnich latach jest spory, zarówno od strony teoretycznej, jak i doświadczalnej, jednak to są dopiero początki tych badań i  środowisko naukowe będzie czekać jeszcze wiele wyzwań i problemów do rozwiązania.
+
+Zademonstrowany w pracy doktorskiej nowy algorytm umożliwia badanie silnych \MZM\ w układach z oddziaływaniami wielociałowymi.
+Metoda ta bazuje na dokładnej diagonalizacji i niestety jej wykorzystanie jest ograniczone do badania stosunkowo małych układów (zawierających kilka węzłów).
+Badanie złożonych układów kwantowych zawierających \MZM, które mogą posłużyć to przetwarzania kwantowej informacji, nie jest możliwe z wykorzystaniem tej nowej metody.
+
+Realizacja przedstawionej w rozprawie doktorskiej nowej bramki fazowej bazującej na fazie geometrycznej dla qubitu bazującego na \MZM, powinna posiadać mniejszy błąd niż standardowa bramka fazowa bazująca na fazie dynamicznej.
+Należy podkreślić, że przedstawiona nowa bramka fazowa, tak samo jak jej standardowa wersja bazująca na fazie dynamicznej, nie jest chroniona topologicznie.
+Problemem realizacji nowej bramki fazowej mogą być jej warunki, jakie muszą być spełnione do jej poprawnego funkcjonowania.
+Od strony technicznej konstrukcja dwóch identycznych, monoatomowych trójzłącz może być problematyczna.
+Problematyczne może być również precyzyjne sterowanie pozycją \MZM\ w układzie tych trójzłącz.
+
+Zasadniczym problemem wykorzystania \MZM\ do konstrukcji topologicznego komputera kwantowego, jest fakt, że dostępny zestaw topologicznie chronionych bramek nie gwarantuje uniwersalności obliczeń --- brakuje chronionej topologicznie bramki fazowej.
+Znaczącym krokiem, mogłoby być poszukiwanie realizacji bardziej złożonych anyonów od \MZM, np. \textit{anyonów Fibbonaciego}~\cite{bonesteel.hormozi.2005,trebst.troyer.2008,nayak.simon.2008}.
+W przeciwieństwie do \MZM, anyony Fibbonaciego mogą zapewnić zestaw topologicznie chronionych bramek gwarantujących uniwersalność obliczeń.
+
+
+\ornament

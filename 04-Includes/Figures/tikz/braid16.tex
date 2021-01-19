@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\braid[yscale=-0.5,xscale=0.75,number of strands=6,
+style strands={1}{red,very thick},
+style strands={2}{blue,very thick},
+style strands={3}{green,very thick},
+style strands={4}{orange,very thick},
+style strands={5}{magenta,very thick},
+style strands={6}{cyan,very thick},
+rotate=90
+](braid)
+a_1 a_2 a_2 a_1^{-1}
+;
+\node[at=(braid-1-s),left ] {$\Gammaii_1$};
+\node[at=(braid-2-s),left ] {$\Gammaii_2$};
+\node[at=(braid-3-s),left ] {$\Gammaii_3$};
+\node[at=(braid-4-s),left ] {$\Gammaii_4$};
+\node[at=(braid-5-s),left ] {$\Gammaii_5$};
+\node[at=(braid-6-s),left ] {$\Gammaii_6$};
+
+\end{tikzpicture}

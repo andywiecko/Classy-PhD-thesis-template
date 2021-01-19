@@ -1,0 +1,31 @@
+%\begin{tikzpicture}[scale=0.75]
+
+\braid[number of strands=4,
+style strands={1}{red,very thick},
+style strands={2}{blue,very thick},
+style strands={3}{green,very thick},
+style strands={4}{orange,very thick}
+](braid)
+a_1
+;
+\node[at=(braid-1-s),above ] {$1$};
+\node[at=(braid-2-s),above ] {$2$};
+\node[at=(braid-3-s),above ] {$3$};
+\node[at=(braid-4-s),above ] {$4$};
+
+\braid[xshift=5cm,number of strands=4,
+style strands={1}{red,very thick},
+style strands={2}{blue,very thick},
+style strands={3}{green,very thick},
+style strands={4}{orange,very thick}
+](braid)
+a_1^{-1}
+;
+\node[at=(braid-1-s),above ] {$1$};
+\node[at=(braid-2-s),above ] {$2$};
+\node[at=(braid-3-s),above ] {$3$};
+\node[at=(braid-4-s),above ] {$4$};
+
+\draw (5,-0.75)node{$\neq$};
+
+%\end{tikzpicture}

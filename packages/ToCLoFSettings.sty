@@ -1,0 +1,70 @@
+% table of contents
+\usepackage{titletoc}
+\usepackage{appendix}
+\usepackage[nottoc]{tocbibind} 
+\usepackage{etoc}
+
+
+\renewcommand{\partname}{Część}
+\def\secname{Sekcja}
+
+
+\titlecontents{part}%
+  [3.7em]% <left>
+ {\bfseries\sffamily\addvspace{1.5em}}% <above-code>
+  {\contentslabel[\partname\ \Romanbar\thecontentslabel:]{4.25em}}% <numbered-entry-format>
+  {\hspace*{-4.25em}}% <numberless-entry-format>
+  {\hfill\HyColor@HyperrefColor{MidnightBlue}\@linkcolor\contentspage}% <filler-page-format>
+
+\titlecontents{chapter}% <section-type>
+  [8.95em]% <left>
+  {\bfseries\sffamily\addvspace{0.5em}}% <above-code>
+      {\contentslabel[\@chapapp\ \thecontentslabel]{5.5em}}% <numbered-entry-format>
+  {\hspace*{-5.5em}}% <numberless-entry-format>
+  {\hfill\HyColor@HyperrefColor{MidnightBlue}\@linkcolor\contentspage}% <filler-page-format>
+
+\g@addto@macro\appendices{%
+  \addtocontents{toc}{\protect\renewcommand{\protect\@chapapp}{\appendixname}}%
+}
+
+\titlecontents{section}[13.95em]% <left>
+  {\addvspace{0.25em}}% <above-code>
+  {\contentslabel[\secname\ \thecontentslabel]{5em}}% <numbered-entry-format>
+  {\hspace*{-5em}}
+{\hfill\HyColor@HyperrefColor{MidnightBlue}\@linkcolor\contentspage}
+%<filler-page-format>
+
+
+\titlecontents*{subsection}[14.5em]
+{\small}
+{\thecontentslabel. }
+{}
+{, \HyColor@HyperrefColor{MidnightBlue}\@linkcolor\thecontentspage}
+[.---][.]
+
+
+\def\printtoctitle#1{\centering\printchaptertitle {#1}}
+
+\def\toc{
+\begingroup
+\contentsmargin{10mm}
+\hypersetup{linkcolor=black}
+\tableofcontents*
+\endgroup  
+}
+
+\def\lof{
+\begingroup
+%\contentsmargin{0em}
+\hypersetup{linkcolor=black}
+\listoffigures
+\endgroup  
+}
+
+% list of figures
+%\def\printloftitle#1{\centering\printchaptertitle {#1}}
+
+\titlecontents{figure}
+  [0em]{}
+  {\contentslabel[\thecontentslabel]{2em}}
+  {}{\ \titlerule*[1pc]{.}\HyColor@HyperrefColor{MidnightBlue}\@linkcolor\contentspage}
